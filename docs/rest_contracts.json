@@ -1,0 +1,2234 @@
+{
+  "source": "https://raw.githubusercontent.com/Kiwoom-Securities/Kiwoom-REST-API/main/kiwoom/_data/kiwoom_api_spec.json",
+  "retrieved_at": "2026-10-15",
+  "sha256": "42a7b3912c9d9588c83bdc2db7779c8d2e038703a2b5562e54ef46ae905cba79",
+  "apis": {
+    "접근토큰 발급(au10001)": {
+      "meta": {
+        "◀ API 리스트 이동": "",
+        "키움 REST API": "",
+        "API 정보": "",
+        "메뉴 위치": "OAuth 인증 > 접근토큰발급 > 접근토큰 발급(au10001)",
+        "API 명": "접근토큰 발급",
+        "API ID": "au10001",
+        "기본정보": "",
+        "Method": "POST",
+        "운영 도메인": "https://api.kiwoom.com",
+        "모의투자 도메인": "https://mockapi.kiwoom.com",
+        "URL": "/oauth2/token",
+        "Format": "JSON",
+        "Content-Type": "application/json;charset=UTF-8",
+        "개요": ""
+      },
+      "request": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "authorization",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "접근토큰",
+            "type": "String",
+            "required": "Y",
+            "length": "1000",
+            "description": "토큰 지정시 토큰타입(\"Bearer\") 붙혀서 호출 \n 예) Bearer Egicyx..."
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 cont-yn값 세팅"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 next-key값 세팅"
+          }
+        ],
+        "body": [
+          {
+            "element": "grant_type",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "grant_type",
+            "type": "String",
+            "required": "Y",
+            "length": "",
+            "description": "client_credentials 입력"
+          },
+          {
+            "element": "appkey",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "앱키",
+            "type": "String",
+            "required": "Y",
+            "length": "",
+            "description": ""
+          },
+          {
+            "element": "secretkey",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "시크릿키",
+            "type": "String",
+            "required": "Y",
+            "length": "",
+            "description": ""
+          }
+        ]
+      },
+      "response": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "다음 데이터가 있을시 Y값 전달"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "다음 데이터가 있을시 다음 키값 전달"
+          }
+        ],
+        "body": [
+          {
+            "element": "expires_dt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "만료일",
+            "type": "String",
+            "required": "Y",
+            "length": "",
+            "description": ""
+          },
+          {
+            "element": "token_type",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "토큰타입",
+            "type": "String",
+            "required": "Y",
+            "length": "",
+            "description": ""
+          },
+          {
+            "element": "token",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "접근토큰",
+            "type": "String",
+            "required": "Y",
+            "length": "",
+            "description": ""
+          }
+        ]
+      },
+      "request_example": "{\n    \"grant_type\": \"client_credentials\",\n    \"appkey\": \"AxserEsdcredca.....\",\n    \"secretkey\": \"SEefdcwcforehDre2fdvc....\"\n}",
+      "response_example": "{\n    \"expires_dt\":\"20241107083713\",\n    \"token_type\":\"bearer\",\n    \"token\":\"WQJCwyqInphKnR3bSRtB9NE1lv...\"\n    \"return_code\":0,\n    \"return_msg\":\"정상적으로 처리되었습니다\"\n}"
+    },
+    "주식기본정보요청(ka10001)": {
+      "meta": {
+        "◀ API 리스트 이동": "",
+        "키움 REST API": "",
+        "API 정보": "",
+        "메뉴 위치": "국내주식 > 종목정보 > 주식기본정보요청(ka10001)",
+        "API 명": "주식기본정보요청",
+        "API ID": "ka10001",
+        "기본정보": "",
+        "Method": "POST",
+        "운영 도메인": "https://api.kiwoom.com",
+        "모의투자 도메인": "https://mockapi.kiwoom.com",
+        "URL": "/api/dostk/stkinfo",
+        "Format": "JSON",
+        "Content-Type": "application/json;charset=UTF-8",
+        "개요": "",
+        "종목 코드로 주식 기본 정보를 조회한다.": ""
+      },
+      "request": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "authorization",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "접근토큰",
+            "type": "String",
+            "required": "Y",
+            "length": "1000",
+            "description": "토큰 지정시 토큰타입(\"Bearer\") 붙혀서 호출 \n 예) Bearer Egicyx..."
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 cont-yn값 세팅"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 next-key값 세팅"
+          }
+        ],
+        "body": [
+          {
+            "element": "stk_cd",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "종목코드",
+            "type": "String",
+            "required": "Y",
+            "length": "20",
+            "description": "거래소별 종목코드\n(KRX:039490,NXT:039490_NX,SOR:039490_AL)"
+          }
+        ]
+      },
+      "response": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "다음 데이터가 있을시 Y값 전달"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "다음 데이터가 있을시 다음 키값 전달"
+          }
+        ],
+        "body": [
+          {
+            "element": "stk_cd",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "종목코드",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "stk_nm",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "종목명",
+            "type": "String",
+            "required": "N",
+            "length": "40",
+            "description": ""
+          },
+          {
+            "element": "setl_mm",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "결산월",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "fav",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "액면가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원"
+          },
+          {
+            "element": "cap",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "자본금",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원"
+          },
+          {
+            "element": "flo_stk",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "상장주식",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 천원"
+          },
+          {
+            "element": "crd_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "신용비율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "oyr_hgst",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연중최고",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "oyr_lwst",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연중최저",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "mac",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "시가총액",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원"
+          },
+          {
+            "element": "mac_wght",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "시가총액비중",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "for_exh_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "외인소진률",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "repl_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "대용가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원"
+          },
+          {
+            "element": "per",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "PER",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "[ 주의 ] PER, ROE 값들은 외부벤더사에서 제공되는 데이터이며 일주일에 한번 또는 실적발표 시즌에 업데이트 됨"
+          },
+          {
+            "element": "eps",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "EPS",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "roe",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "ROE",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "[ 주의 ]  PER, ROE 값들은 외부벤더사에서 제공되는 데이터이며 일주일에 한번 또는 실적발표 시즌에 업데이트 됨"
+          },
+          {
+            "element": "pbr",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "PBR",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "ev",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "EV",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "bps",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "BPS",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "sale_amt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "매출액",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원"
+          },
+          {
+            "element": "bus_pro",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "영업이익",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원"
+          },
+          {
+            "element": "cup_nga",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "당기순이익",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원"
+          },
+          {
+            "element": "250hgst",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "250최고",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "250lwst",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "250최저",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "high_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "고가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "open_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "시가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "low_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "저가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "upl_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "상한가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "lst_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "하한가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "base_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "기준가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원"
+          },
+          {
+            "element": "exp_cntr_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "예상체결가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "exp_cntr_qty",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "예상체결수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "250hgst_pric_dt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "250최고가일",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "YYYYMMDD"
+          },
+          {
+            "element": "250hgst_pric_pre_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "250최고가대비율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "250lwst_pric_dt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "250최저가일",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "YYYYMMDD"
+          },
+          {
+            "element": "250lwst_pric_pre_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "250최저가대비율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "cur_prc",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "현재가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "pre_sig",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "대비기호",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "1: 상한가, 2:상승, 3:보합, 4:하한가, 5:하락"
+          },
+          {
+            "element": "pred_pre",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "전일대비",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "flu_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "등락율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "trde_qty",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "거래량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "trde_pre",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "거래대비",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "fav_unit",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "액면가단위",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "dstr_stk",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "유통주식",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "dstr_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "유통비율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 첫째 자리까지 포맷된 백분율"
+          }
+        ]
+      },
+      "request_example": "{\n    \"stk_cd\": \"005930\"\n}",
+      "response_example": "{\n    \"stk_cd\": \"005930\",\n    \"stk_nm\": \"삼성전자\",\n    \"setl_mm\": \"12\",\n    \"fav\": \"5000\",\n    \"cap\": \"1311\",\n    \"flo_stk\": \"25527\",\n    \"crd_rt\": \"+0.08\",\n    \"oyr_hgst\": \"+181400\",\n    \"oyr_lwst\": \"-91200\",\n    \"mac\": \"24352\",\n    \"mac_wght\": \"\",\n    \"for_exh_rt\": \"0.00\",\n    \"repl_pric\": \"66780\",\n    \"per\": \"\",\n    \"eps\": \"\",\n    \"roe\": \"\",\n    \"pbr\": \"\",\n    \"ev\": \"\",\n    \"bps\": \"-75300\",\n    \"sale_amt\": \"0\",\n    \"bus_pro\": \"0\",\n    \"cup_nga\": \"0\",\n    \"250hgst\": \"+124000\",\n    \"250lwst\": \"-66800\",\n    \"high_pric\": \"95400\",\n    \"open_pric\": \"-0\",\n    \"low_pric\": \"0\",\n    \"upl_pric\": \"20241016\",\n    \"lst_pric\": \"-47.41\",\n    \"base_pric\": \"20231024\",\n    \"exp_cntr_pric\": \"+26.69\",\n    \"exp_cntr_qty\": \"95400\",\n    \"250hgst_pric_dt\": \"3\",\n    \"250hgst_pric_pre_rt\": \"0\",\n    \"250lwst_pric_dt\": \"0.00\",\n    \"250lwst_pric_pre_rt\": \"0\",\n    \"cur_prc\": \"0.00\",\n    \"pre_sig\": \"\",\n    \"pred_pre\": \"\",\n    \"flu_rt\": \"0\",\n    \"trde_qty\": \"0\",\n    \"trde_pre\": \"0\",\n    \"fav_unit\": \"0\",\n    \"dstr_stk\": \"0\",\n    \"dstr_rt\": \"0\",\n    \"return_code\": 0,\n    \"return_msg\": \"정상적으로 처리되었습니다\"\n}"
+    },
+    "업종별투자자순매수요청(ka10051)": {
+      "meta": {
+        "◀ API 리스트 이동": "",
+        "키움 REST API": "",
+        "API 정보": "",
+        "메뉴 위치": "국내주식 > 업종 > 업종별투자자순매수요청(ka10051)",
+        "API 명": "업종별투자자순매수요청",
+        "API ID": "ka10051",
+        "기본정보": "",
+        "Method": "POST",
+        "운영 도메인": "https://api.kiwoom.com",
+        "모의투자 도메인": "https://mockapi.kiwoom.com",
+        "URL": "/api/dostk/sect",
+        "Format": "JSON",
+        "Content-Type": "application/json;charset=UTF-8",
+        "개요": "",
+        "업종별 투자자별 순매수 정보를 조회합니다.": ""
+      },
+      "request": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "authorization",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "접근토큰",
+            "type": "String",
+            "required": "Y",
+            "length": "1000",
+            "description": "토큰 지정시 토큰타입(\"Bearer\") 붙혀서 호출 \n 예) Bearer Egicyx..."
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 cont-yn값 세팅"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 next-key값 세팅"
+          }
+        ],
+        "body": [
+          {
+            "element": "mrkt_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "시장구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "코스피:0, 코스닥:1"
+          },
+          {
+            "element": "amt_qty_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "금액수량구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "금액:0, 수량:1"
+          },
+          {
+            "element": "base_dt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "기준일자",
+            "type": "String",
+            "required": "N",
+            "length": "8",
+            "description": "YYYYMMDD"
+          },
+          {
+            "element": "stex_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "거래소구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "1:KRX, 2:NXT, 3:통합"
+          }
+        ]
+      },
+      "response": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "다음 데이터가 있을시 Y값 전달"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "다음 데이터가 있을시 다음 키값 전달"
+          }
+        ],
+        "body": [
+          {
+            "element": "inds_netprps",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "업종별순매수",
+            "type": "LIST",
+            "required": "N",
+            "length": "",
+            "description": ""
+          },
+          {
+            "element": "inds_cd",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "업종코드",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "inds_nm",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "업종명",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "cur_prc",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "현재가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "pre_smbol",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "대비부호",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "1: 상한가, 2:상승, 3:보합, 4:하한가, 5:하락"
+          },
+          {
+            "element": "pred_pre",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "전일대비",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "flu_rt",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "등락율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "trde_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "거래량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "sc_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "증권순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "insrnc_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "보험순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "invtrt_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "투신순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "bank_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "은행순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "jnsinkm_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "종신금순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "endw_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "기금순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "etc_corp_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "기타법인순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "ind_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "개인순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "frgnr_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "외국인순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "native_trmt_frgnr_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "내국인대우외국인순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "natn_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "국가순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "samo_fund_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "사모펀드순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "orgn_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "기관계순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 억원 혹은 1000주, 부호가 포함된 숫자"
+          }
+        ]
+      },
+      "request_example": "{\n    \"mrkt_tp\": \"0\",\n    \"amt_qty_tp\": \"0\",\n    \"base_dt\": \"20241107\",\n    \"stex_tp\": \"3\"\n}",
+      "response_example": "{\n    \"inds_netprps\": [\n        {\n            \"inds_cd\": \"001_AL\",\n            \"inds_nm\": \"종합(KOSPI)\",\n            \"cur_prc\": \"+265381\",\n            \"pre_smbol\": \"2\",\n            \"pred_pre\": \"+9030\",\n            \"flu_rt\": \"352\",\n            \"trde_qty\": \"1164\",\n            \"sc_netprps\": \"+255\",\n            \"insrnc_netprps\": \"+0\",\n            \"invtrt_netprps\": \"+0\",\n            \"bank_netprps\": \"+0\",\n            \"jnsinkm_netprps\": \"+0\",\n            \"endw_netprps\": \"+0\",\n            \"etc_corp_netprps\": \"+0\",\n            \"ind_netprps\": \"-0\",\n            \"frgnr_netprps\": \"-622\",\n            \"native_trmt_frgnr_netprps\": \"+4\",\n            \"natn_netprps\": \"+0\",\n            \"samo_fund_netprps\": \"+1\",\n            \"orgn_netprps\": \"+601\"\n        },\n        {\n            \"inds_cd\": \"002_AL\",\n            \"inds_nm\": \"대형주\",\n            \"cur_prc\": \"+265964\",\n            \"pre_smbol\": \"2\",\n            \"pred_pre\": \"+10690\",\n            \"flu_rt\": \"419\",\n            \"trde_qty\": \"1145\",\n            \"sc_netprps\": \"+255\",\n            \"insrnc_netprps\": \"+0\",\n            \"invtrt_netprps\": \"+0\",\n            \"bank_netprps\": \"+0\",\n            \"jnsinkm_netprps\": \"+0\",\n            \"endw_netprps\": \"+0\",\n            \"etc_corp_netprps\": \"+0\",\n            \"ind_netprps\": \"+16\",\n            \"frgnr_netprps\": \"-622\",\n            \"native_trmt_frgnr_netprps\": \"+4\",\n            \"natn_netprps\": \"+0\",\n            \"samo_fund_netprps\": \"+1\",\n            \"orgn_netprps\": \"+602\"\n        }\n    ],\n    \"return_code\": 0,\n    \"return_msg\": \"정상적으로 처리되었습니다\"\n}"
+    },
+    "장중투자자별매매요청(ka10063)": {
+      "meta": {
+        "◀ API 리스트 이동": "",
+        "키움 REST API": "",
+        "API 정보": "",
+        "메뉴 위치": "국내주식 > 시세 > 장중투자자별매매요청(ka10063)",
+        "API 명": "장중투자자별매매요청",
+        "API ID": "ka10063",
+        "기본정보": "",
+        "Method": "POST",
+        "운영 도메인": "https://api.kiwoom.com",
+        "모의투자 도메인": "https://mockapi.kiwoom.com",
+        "URL": "/api/dostk/mrkcond",
+        "Format": "JSON",
+        "Content-Type": "application/json;charset=UTF-8",
+        "개요": "",
+        "장중 투자자별 매매 정보를 조회합니다.": ""
+      },
+      "request": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "authorization",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "접근토큰",
+            "type": "String",
+            "required": "Y",
+            "length": "1000",
+            "description": "토큰 지정시 토큰타입(\"Bearer\") 붙혀서 호출 \n 예) Bearer Egicyx..."
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 cont-yn값 세팅"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 next-key값 세팅"
+          }
+        ],
+        "body": [
+          {
+            "element": "mrkt_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "시장구분",
+            "type": "String",
+            "required": "Y",
+            "length": "3",
+            "description": "000:전체, 001:코스피, 101:코스닥"
+          },
+          {
+            "element": "amt_qty_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "금액수량구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "1: 금액&수량"
+          },
+          {
+            "element": "invsr",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "투자자별",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "6:외국인, 7:기관계, 1:투신, 0:보험, 2:은행, 3:연기금, 4:국가, 5:기타법인"
+          },
+          {
+            "element": "frgn_all",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "외국계전체",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "1:체크, 0:미체크"
+          },
+          {
+            "element": "smtm_netprps_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "동시순매수구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "1:체크, 0:미체크"
+          },
+          {
+            "element": "stex_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "거래소구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "1:KRX, 2:NXT 3.통합"
+          }
+        ]
+      },
+      "response": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "다음 데이터가 있을시 Y값 전달"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "다음 데이터가 있을시 다음 키값 전달"
+          }
+        ],
+        "body": [
+          {
+            "element": "opmr_invsr_trde",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "장중투자자별매매",
+            "type": "LIST",
+            "required": "N",
+            "length": "",
+            "description": ""
+          },
+          {
+            "element": "stk_cd",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "종목코드",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": ""
+          },
+          {
+            "element": "stk_nm",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "종목명",
+            "type": "String",
+            "required": "N",
+            "length": "40",
+            "description": ""
+          },
+          {
+            "element": "cur_prc",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "현재가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "pre_sig",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "대비기호",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "1: 상한가, 2:상승, 3:보합, 4:하한가, 5:하락"
+          },
+          {
+            "element": "pred_pre",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "전일대비",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "flu_rt",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "등락율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "acc_trde_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "누적거래량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "netprps_amt",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "순매수금액",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "prev_netprps_amt",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "이전순매수금액",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "buy_amt",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "매수금액",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "netprps_amt_irds",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "순매수금액증감",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "buy_amt_irds",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "매수금액증감",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "sell_amt",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "매도금액",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "sell_amt_irds",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "매도금액증감",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "netprps_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "순매수수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "prev_pot_netprps_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "이전시점순매수수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "netprps_irds",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "순매수증감",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "buy_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "매수수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "buy_qty_irds",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "매수수량증감",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "sell_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "매도수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          },
+          {
+            "element": "sell_qty_irds",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "매도수량증감",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1주"
+          }
+        ]
+      },
+      "request_example": "{\n    \"mrkt_tp\": \"000\",\n    \"amt_qty_tp\": \"1\",\n    \"invsr\": \"6\",\n    \"frgn_all\": \"0\",\n    \"smtm_netprps_tp\": \"0\",\n    \"stex_tp\": \"3\"\n}",
+      "response_example": "{\n    'opmr_invsr_trde': \n        [\n            {\n                'stk_cd': '005930',\n                'stk_nm': '삼성전자',\n                'cur_prc': '64',\n                'pre_sig': '3',\n                'pred_pre': '0',\n                'flu_rt': '0.00',\n                'acc_trde_qty': '1',\n                'netprps_qty': '+1083000',\n                'prev_pot_netprps_qty': '+1083000',\n                'netprps_irds': '0',\n                'buy_qty': '+1113000',\n                'buy_qty_irds': '0',\n                'sell_qty': '--30000',\n                'sell_qty_irds': '0'\n            },\n            {\n                'stk_cd': '005930',\n                'stk_nm': '삼성전자',\n                 'cur_prc': '284',\n                 'pre_sig': '3',\n                 'pred_pre': '0',\n                 'flu_rt': '0.00',\n                 'acc_trde_qty': '0',\n                 'netprps_qty': '--261000',\n                 'prev_pot_netprps_qty': '--347000',\n                 'netprps_irds': '+86000',\n                 'buy_qty': '+2728000',\n                 'buy_qty_irds': '+108000',\n                 'sell_qty': '--2989000',\n                 'sell_qty_irds': '+22000'\n            }\n        ],\n    'return_code': 0,\n    'return_msg': '정상적으로 처리되었습니다'\n }"
+    },
+    "업종현재가요청(ka20001)": {
+      "meta": {
+        "◀ API 리스트 이동": "",
+        "키움 REST API": "",
+        "API 정보": "",
+        "메뉴 위치": "국내주식 > 업종 > 업종현재가요청(ka20001)",
+        "API 명": "업종현재가요청",
+        "API ID": "ka20001",
+        "기본정보": "",
+        "Method": "POST",
+        "운영 도메인": "https://api.kiwoom.com",
+        "모의투자 도메인": "https://mockapi.kiwoom.com",
+        "URL": "/api/dostk/sect",
+        "Format": "JSON",
+        "Content-Type": "application/json;charset=UTF-8",
+        "개요": "",
+        "업종 현재가 정보를 조회합니다.": ""
+      },
+      "request": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "authorization",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "접근토큰",
+            "type": "String",
+            "required": "Y",
+            "length": "1000",
+            "description": "토큰 지정시 토큰타입(\"Bearer\") 붙혀서 호출 \n 예) Bearer Egicyx..."
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 cont-yn값 세팅"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 next-key값 세팅"
+          }
+        ],
+        "body": [
+          {
+            "element": "mrkt_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "시장구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "0:코스피, 1:코스닥, 2:코스피200"
+          },
+          {
+            "element": "inds_cd",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "업종코드",
+            "type": "String",
+            "required": "Y",
+            "length": "3",
+            "description": "001:종합(KOSPI), 002:대형주, 003:중형주, 004:소형주 101:종합(KOSDAQ), 201:KOSPI200, 302:KOSTAR, 701: KRX100 나머지 ※ 업종코드 참고"
+          }
+        ]
+      },
+      "response": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "다음 데이터가 있을시 Y값 전달"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "다음 데이터가 있을시 다음 키값 전달"
+          }
+        ],
+        "body": [
+          {
+            "element": "cur_prc",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "현재가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 지수, 부호가 포함된 숫자"
+          },
+          {
+            "element": "pred_pre_sig",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "전일대비기호",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "1: 상한가, 2:상승, 3:보합, 4:하한가, 5:하락"
+          },
+          {
+            "element": "pred_pre",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "전일대비",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 지수, 부호가 포함된 숫자"
+          },
+          {
+            "element": "flu_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "등락률",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "trde_qty",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "거래량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1000주"
+          },
+          {
+            "element": "trde_prica",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "거래대금",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "trde_frmatn_stk_num",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "거래형성종목수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 종목수"
+          },
+          {
+            "element": "trde_frmatn_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "거래형성비율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "open_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "시가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 지수, 부호가 포함된 숫자"
+          },
+          {
+            "element": "high_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "고가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 지수, 부호가 포함된 숫자"
+          },
+          {
+            "element": "low_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "저가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 지수, 부호가 포함된 숫자"
+          },
+          {
+            "element": "upl",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "상한",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 종목수"
+          },
+          {
+            "element": "rising",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "상승",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 종목수"
+          },
+          {
+            "element": "stdns",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "보합",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 종목수"
+          },
+          {
+            "element": "fall",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "하락",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 종목수"
+          },
+          {
+            "element": "lst",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "하한",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 종목수"
+          },
+          {
+            "element": "52wk_hgst_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "52주최고가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 지수, 부호가 포함된 숫자"
+          },
+          {
+            "element": "52wk_hgst_pric_dt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "52주최고가일",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "YYYYMMDD"
+          },
+          {
+            "element": "52wk_hgst_pric_pre_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "52주최고가대비율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "52wk_lwst_pric",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "52주최저가",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 지수, 부호가 포함된 숫자"
+          },
+          {
+            "element": "52wk_lwst_pric_dt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "52주최저가일",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "YYYYMMDD"
+          },
+          {
+            "element": "52wk_lwst_pric_pre_rt",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "52주최저가대비율",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "inds_cur_prc_tm",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "업종현재가_시간별",
+            "type": "LIST",
+            "required": "N",
+            "length": "",
+            "description": ""
+          },
+          {
+            "element": "tm_n",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "시간n",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "HHmmss"
+          },
+          {
+            "element": "cur_prc_n",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "현재가n",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 지수, 부호가 포함된 숫자"
+          },
+          {
+            "element": "pred_pre_sig_n",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "전일대비기호n",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "1: 상한가, 2:상승, 3:보합, 4:하한가, 5:하락"
+          },
+          {
+            "element": "pred_pre_n",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "전일대비n",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 지수, 부호가 포함된 숫자"
+          },
+          {
+            "element": "flu_rt_n",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "등락률n",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: %, 부호 포함 소수점 둘째 자리까지 포맷된 백분율"
+          },
+          {
+            "element": "trde_qty_n",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "거래량n",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1000주"
+          },
+          {
+            "element": "acc_trde_qty_n",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "누적거래량n",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1000주"
+          }
+        ]
+      },
+      "request_example": "{\n    \"mrkt_tp\": \"0\",\n    \"inds_cd\": \"001\"\n}",
+      "response_example": "{\n    \"cur_prc\": \"-2394.49\",\n    \"pred_pre_sig\": \"5\",\n    \"pred_pre\": \"-278.47\",\n    \"flu_rt\": \"-10.42\",\n    \"trde_qty\": \"890\",\n    \"trde_prica\": \"41867\",\n    \"trde_frmatn_stk_num\": \"330\",\n    \"trde_frmatn_rt\": \"+34.38\",\n    \"open_pric\": \"-2669.53\",\n    \"high_pric\": \"-2669.53\",\n    \"low_pric\": \"-2375.21\",\n    \"upl\": \"0\",\n    \"rising\": \"17\",\n    \"stdns\": \"183\",\n    \"fall\": \"130\",\n    \"lst\": \"3\",\n    \"52wk_hgst_pric\": \"+3001.91\",\n    \"52wk_hgst_pric_dt\": \"20241004\",\n    \"52wk_hgst_pric_pre_rt\": \"-20.23\",\n    \"52wk_lwst_pric\": \"-1608.07\",\n    \"52wk_lwst_pric_dt\": \"20241031\",\n    \"52wk_lwst_pric_pre_rt\": \"+48.90\",\n    \"inds_cur_prc_tm\": [\n        {\n            \"tm_n\": \"143000\",\n            \"cur_prc_n\": \"-2394.49\",\n            \"pred_pre_sig_n\": \"5\",\n            \"pred_pre_n\": \"-278.47\",\n            \"flu_rt_n\": \"-10.42\",\n            \"trde_qty_n\": \"14\",\n            \"acc_trde_qty_n\": \"890\",\n            \"stex_tp\": \"\"\n        },\n        {\n            \"tm_n\": \"142950\",\n            \"cur_prc_n\": \"-2394.49\",\n            \"pred_pre_sig_n\": \"5\",\n            \"pred_pre_n\": \"-278.47\",\n            \"flu_rt_n\": \"-10.42\",\n            \"trde_qty_n\": \"14\",\n            \"acc_trde_qty_n\": \"876\",\n            \"stex_tp\": \"\"\n        },\n        {\n            \"tm_n\": \"142940\",\n            \"cur_prc_n\": \"-2394.49\",\n            \"pred_pre_sig_n\": \"5\",\n            \"pred_pre_n\": \"-278.47\",\n            \"flu_rt_n\": \"-10.42\",\n            \"trde_qty_n\": \"14\",\n            \"acc_trde_qty_n\": \"862\",\n            \"stex_tp\": \"\"\n        },\n        {\n            \"tm_n\": \"142930\",\n            \"cur_prc_n\": \"-2395.62\",\n            \"pred_pre_sig_n\": \"5\",\n            \"pred_pre_n\": \"-277.34\",\n            \"flu_rt_n\": \"-10.38\",\n            \"trde_qty_n\": \"14\",\n            \"acc_trde_qty_n\": \"848\",\n            \"stex_tp\": \"\"\n        }\n    ],\n    \"return_code\": 0,\n    \"return_msg\": \"정상적으로 처리되었습니다\"\n}"
+    },
+    "프로그램매매추이요청 시간대별(ka90005)": {
+      "meta": {
+        "◀ API 리스트 이동": "",
+        "키움 REST API": "",
+        "API 정보": "",
+        "메뉴 위치": "국내주식 > 시세 > 프로그램매매추이요청 시간대별(ka90005)",
+        "API 명": "프로그램매매추이요청 시간대별",
+        "API ID": "ka90005",
+        "기본정보": "",
+        "Method": "POST",
+        "운영 도메인": "https://api.kiwoom.com",
+        "모의투자 도메인": "https://mockapi.kiwoom.com",
+        "URL": "/api/dostk/mrkcond",
+        "Format": "JSON",
+        "Content-Type": "application/json;charset=UTF-8",
+        "개요": "",
+        "프로그램매매 추이정보를 시간대별로 조회한다.": ""
+      },
+      "request": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "authorization",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "접근토큰",
+            "type": "String",
+            "required": "Y",
+            "length": "1000",
+            "description": "토큰 지정시 토큰타입(\"Bearer\") 붙혀서 호출 \n 예) Bearer Egicyx..."
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 cont-yn값 세팅"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "응답 Header의 연속조회여부값이 Y일 경우 다음데이터 요청시 응답 Header의 next-key값 세팅"
+          }
+        ],
+        "body": [
+          {
+            "element": "date",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "날짜",
+            "type": "String",
+            "required": "Y",
+            "length": "8",
+            "description": "YYYYMMDD"
+          },
+          {
+            "element": "amt_qty_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "금액수량구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "1:금액(백만원), 2:수량(천주)"
+          },
+          {
+            "element": "mrkt_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "시장구분",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "코스피- 거래소구분값 1일경우:P00101, 2일경우:P001_NX01, 3일경우:P001_AL01\n코스닥- 거래소구분값 1일경우:P10102, 2일경우:P101_NX02, 3일경우:P101_AL02"
+          },
+          {
+            "element": "min_tic_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "분틱구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "0:틱, 1:분"
+          },
+          {
+            "element": "stex_tp",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "거래소구분",
+            "type": "String",
+            "required": "Y",
+            "length": "1",
+            "description": "1:KRX, 2:NXT 3.통합"
+          }
+        ]
+      },
+      "response": {
+        "header": [
+          {
+            "element": "api-id",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "TR명",
+            "type": "String",
+            "required": "Y",
+            "length": "10",
+            "description": "7자리 TR코드, ex) ka00001"
+          },
+          {
+            "element": "cont-yn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회여부",
+            "type": "String",
+            "required": "N",
+            "length": "1",
+            "description": "다음 데이터가 있을시 Y값 전달"
+          },
+          {
+            "element": "next-key",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "연속조회키",
+            "type": "String",
+            "required": "N",
+            "length": "50",
+            "description": "다음 데이터가 있을시 다음 키값 전달"
+          }
+        ],
+        "body": [
+          {
+            "element": "prm_trde_trnsn",
+            "depth": 0,
+            "is_section": false,
+            "한글명": "프로그램매매추이",
+            "type": "LIST",
+            "required": "N",
+            "length": "",
+            "description": ""
+          },
+          {
+            "element": "cntr_tm",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "체결시간",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "HHmmss"
+          },
+          {
+            "element": "dfrt_trde_sel",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "차익거래매도",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "dfrt_trde_buy",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "차익거래매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "dfrt_trde_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "차익거래순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "ndiffpro_trde_sel",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "비차익거래매도",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "ndiffpro_trde_buy",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "비차익거래매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "ndiffpro_trde_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "비차익거래순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "dfrt_trde_sell_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "차익거래매도수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1000주"
+          },
+          {
+            "element": "dfrt_trde_buy_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "차익거래매수수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1000주"
+          },
+          {
+            "element": "dfrt_trde_netprps_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "차익거래순매수수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "ndiffpro_trde_sell_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "비차익거래매도수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1000주"
+          },
+          {
+            "element": "ndiffpro_trde_buy_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "비차익거래매수수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1000주"
+          },
+          {
+            "element": "ndiffpro_trde_netprps_qty",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "비차익거래순매수수량",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 1000주, 부호가 포함된 숫자"
+          },
+          {
+            "element": "all_sel",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "전체매도",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "all_buy",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "전체매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원"
+          },
+          {
+            "element": "all_netprps",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "전체순매수",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "단위: 백만원, 부호가 포함된 숫자"
+          },
+          {
+            "element": "kospi200",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "KOSPI200",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "부호가 포함된 숫자"
+          },
+          {
+            "element": "basis",
+            "depth": 1,
+            "is_section": false,
+            "한글명": "BASIS",
+            "type": "String",
+            "required": "N",
+            "length": "20",
+            "description": "소수점 둘째 자리까지 포맷된 숫자"
+          }
+        ]
+      },
+      "request_example": "{\n    \"date\": \"20241101\",\n    \"amt_qty_tp\": \"1\",\n    \"mrkt_tp\": \"P00101\",\n    \"min_tic_tp\": \"1\",\n    \"stex_tp\": \"1\"\n}",
+      "response_example": "{\n    \"prm_trde_trnsn\": [\n        {\n            \"cntr_tm\": \"170500\",\n            \"dfrt_trde_sel\": \"0\",\n            \"dfrt_trde_buy\": \"0\",\n            \"dfrt_trde_netprps\": \"0\",\n            \"ndiffpro_trde_sel\": \"1\",\n            \"ndiffpro_trde_buy\": \"17\",\n            \"ndiffpro_trde_netprps\": \"+17\",\n            \"dfrt_trde_sell_qty\": \"0\",\n            \"dfrt_trde_buy_qty\": \"0\",\n            \"dfrt_trde_netprps_qty\": \"0\",\n            \"ndiffpro_trde_sell_qty\": \"0\",\n            \"ndiffpro_trde_buy_qty\": \"0\",\n            \"ndiffpro_trde_netprps_qty\": \"+0\",\n            \"all_sel\": \"1\",\n            \"all_buy\": \"17\",\n            \"all_netprps\": \"+17\",\n            \"kospi200\": \"+47839\",\n            \"basis\": \"-146.59\"\n        },\n        {\n            \"cntr_tm\": \"170400\",\n            \"dfrt_trde_sel\": \"0\",\n            \"dfrt_trde_buy\": \"0\",\n            \"dfrt_trde_netprps\": \"0\",\n            \"ndiffpro_trde_sel\": \"1\",\n            \"ndiffpro_trde_buy\": \"17\",\n            \"ndiffpro_trde_netprps\": \"+17\",\n            \"dfrt_trde_sell_qty\": \"0\",\n            \"dfrt_trde_buy_qty\": \"0\",\n            \"dfrt_trde_netprps_qty\": \"0\",\n            \"ndiffpro_trde_sell_qty\": \"0\",\n            \"ndiffpro_trde_buy_qty\": \"0\",\n            \"ndiffpro_trde_netprps_qty\": \"+0\",\n            \"all_sel\": \"1\",\n            \"all_buy\": \"17\",\n            \"all_netprps\": \"+17\",\n            \"kospi200\": \"+47839\",\n            \"basis\": \"-146.59\"\n        }\n    ],\n    \"return_code\": 0,\n    \"return_msg\": \"정상적으로 처리되었습니다\"\n}"
+    }
+  }
+}

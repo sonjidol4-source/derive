@@ -1,0 +1,19 @@
+# 실거래·수집 데이터 (sqlite 293MB, 포지션·로그 포함) — 깃허브에 올리지 않음
+data/
+
+# 로컬 백업 폴더와 편집 중 사본
+backup_*/
+*.bak
+*.before_*
+*.before-*
+
+# 로컬 32비트 파이썬 런타임(145MB)과 캐시
+runtime32/
+__pycache__/
+*.pyc
+
+# 키·인증 파일 (config.json 은 작업 폴더 밖 파일 경로만 가리킴)
+local_credentials.json
+ls_openapi.json
+*.pem
+.env

@@ -1,0 +1,5 @@
+investor,kind,code,expiry,strike,net_qty,avg_price,delta,asof,source,scope
+외국인,F,가상선물,2026-12-10,,1000,500,1,2026-10-14T10:30:00+09:00,가상예시,broker_estimate
+외국인,C,가상콜,2026-12-10,510,500,4,0.4,2026-10-14T10:30:00+09:00,가상예시,broker_estimate
+외국인,P,가상풋,2026-12-10,490,-300,3,-0.35,2026-10-14T10:30:00+09:00,가상예시,broker_estimate
+기관,F,가상선물,2026-12-10,,-700,500,1,2026-10-14T10:30:00+09:00,가상예시,broker_estimate

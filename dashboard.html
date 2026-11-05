@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DERIV RADAR · 파생 수급 레이더</title>
+<style>
+:root{--bg:#090c12;--panel:#111720;--line:#243040;--muted:#91a0b5;--ink:#f2f5fb;--up:#ff7974;--down:#75a8ff;--gold:#e8c77b;--green:#73d9b6}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px -apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif}button,input,textarea,select{font:inherit}button,a.button{background:#1c2838;border:1px solid #39475a;border-radius:7px;color:var(--ink);padding:9px 12px;cursor:pointer;text-decoration:none}button:hover{border-color:var(--gold)}a{color:var(--gold)}header{position:sticky;top:0;z-index:10;background:#090c12ed;border-bottom:1px solid var(--line);padding:17px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;backdrop-filter:blur(12px)}.brand{letter-spacing:2.4px;font-size:18px;font-weight:750}.brand span{color:var(--gold)}.sub{color:var(--muted);font-size:11px;margin-top:5px;letter-spacing:.4px}nav{display:flex;gap:17px}nav a{color:var(--muted);text-decoration:none;font-size:12px}.topright{display:flex;align-items:center;gap:10px;font-size:12px}.chip{border:1px solid var(--line);padding:5px 9px;border-radius:20px;color:var(--muted);font-size:11px}.demo{color:var(--gold);border-color:#69583b}.container{max-width:1560px;margin:auto;padding:22px 28px 40px}.banner{border:1px solid #635535;background:#272319;color:#f0dca4;padding:11px 15px;margin-bottom:16px;border-radius:8px;line-height:1.6}.hero{background:linear-gradient(110deg,#17212e,#121822);border:1px solid #344152;border-radius:12px;padding:24px;display:grid;grid-template-columns:1.15fr 1fr;gap:25px}.eyebrow{font-size:10px;letter-spacing:1.5px;color:var(--muted);font-weight:700}h1{font-size:30px;letter-spacing:-1px;margin:9px 0 10px}h2{font-size:14px;margin:0}h3{font-size:13px;margin:0 0 12px}.guide{color:#c0ccdc;line-height:1.75;font-size:13px}.facts{padding:0;margin:12px 0 0;list-style:none}.facts li{line-height:1.75;color:#bfc9d8;font-size:12px}.facts li:before{content:'· ';color:var(--gold)}.tone-up{color:var(--up)}.tone-down{color:var(--down)}.muted{color:var(--muted)}.up{color:var(--up)}.down{color:var(--down)}.gold{color:var(--gold)}.num{font-variant-numeric:tabular-nums;font-family:'Consolas',monospace;font-weight:600}.cards{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:14px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:15px}.card .title{font-size:11px;color:var(--muted)}.card strong{font-size:24px;display:block;margin-top:10px;white-space:nowrap}.card small{font-size:10px;display:block;color:var(--muted);margin-top:8px;min-height:13px}.grid{display:grid;grid-template-columns:1.3fr 1fr;gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;min-width:0;margin-bottom:14px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}.note{color:var(--muted);font-size:11px;line-height:1.75;margin:9px 0 0}.legend{display:flex;gap:15px;color:var(--muted);font-size:10px;margin-bottom:8px;flex-wrap:wrap}.legend b{font-weight:600}.chart{width:100%;height:auto;min-height:190px}.chart text{font-size:10px;fill:var(--muted);font-family:Consolas,monospace}.chart .gridline{stroke:var(--line);stroke-width:1}.empty{padding:38px 12px;text-align:center;color:var(--muted);line-height:1.7;font-size:12px;border:1px dashed var(--line);border-radius:6px}table{border-collapse:collapse;width:100%;font-size:12px}th{font-size:10px;text-align:left;font-weight:500;color:var(--muted);padding:10px 5px;border-bottom:1px solid var(--line)}td{padding:12px 5px;border-bottom:1px solid #1e2835;vertical-align:top}td.r,th.r{text-align:right}.scroller{overflow:auto}.signal-table td{font-size:11px}.signal-table small{display:block;font-family:inherit;font-size:10px;line-height:1.6;color:var(--muted);margin-top:4px}.signal-table summary{cursor:pointer}.stack{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.pill{font-size:10px;border-radius:5px;background:#202b3a;padding:6px 9px;color:var(--gold)}.quality-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.quality-row{padding:12px;border:1px solid var(--line);border-radius:7px;font-size:11px;line-height:1.65}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:5px}.good{background:var(--green)}.bad{background:var(--up)}.row-buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.full{grid-column:1/-1}.mini{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{border:1px solid var(--line);padding:14px;border-radius:7px;font-size:11px;color:var(--muted)}.metric b{display:block;font-size:20px;margin:9px 0;color:var(--ink)}.footer{font-size:11px;color:var(--muted);line-height:1.8;padding-top:12px}.badge{font-size:9px;border:1px solid #4a5e76;padding:3px 5px;border-radius:4px;margin-left:5px}.source-status{font-size:11px;color:var(--muted);line-height:1.9}.alert{color:var(--gold)}details>summary{cursor:pointer}details pre{white-space:pre-wrap;color:#cbd8e9;font-size:11px}textarea{display:block;width:100%;min-height:210px;background:var(--bg);color:#cbd8e9;border:1px solid var(--line);border-radius:7px;padding:14px;line-height:1.6;font-family:Consolas,monospace;font-size:12px;margin-top:15px}select{padding:9px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;max-width:100%}.toast{position:fixed;bottom:25px;right:25px;max-width:450px;background:#27374a;border:1px solid #607695;padding:16px;border-radius:8px;z-index:100;line-height:1.6}.hidden{display:none}.td-line{display:grid;grid-template-columns:76px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid #1e2835}.td-line:last-child{border-bottom:0}.td-who{font-weight:700;font-size:13px;padding-top:2px}.td-head{font-size:15px;font-weight:700;margin-bottom:4px}.td-line small{display:block;color:#c0ccdc;font-size:12px;line-height:1.65}.td-line small.muted{color:var(--muted)}.td-cell small{display:block;color:var(--muted);font-size:10px;margin-top:3px;font-family:inherit;font-weight:400}.td-oi{font-size:12px;line-height:1.8}.td-oi b{font-weight:650}.td-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-top:14px}.td-grid>div{border:1px solid var(--line);border-radius:8px;padding:12px}@media(max-width:1100px){.td-grid{grid-template-columns:1fr}.td-line{grid-template-columns:1fr}}html{scroll-behavior:smooth;scroll-padding-top:90px}@media(max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}nav{display:none}.grid{grid-template-columns:1fr}.quality-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){header{padding:14px 16px}.container{padding:16px}.topright{flex-wrap:wrap;justify-content:flex-end}.hero{grid-template-columns:1fr;padding:20px;gap:5px}.cards{grid-template-columns:repeat(2,1fr)}.card strong{font-size:22px}.panel{padding:15px}.quality-grid{grid-template-columns:1fr}.mini{grid-template-columns:1fr}.brand{font-size:14px}.sub{max-width:130px}h1{font-size:27px}}
+.insight-list{display:grid;gap:10px}.insight-row{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.45}.dot{flex:none;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;background:var(--line)}.dot.up{background:rgba(255,121,116,.18);color:var(--up)}.dot.down{background:rgba(117,168,255,.18);color:var(--down)}.dot.flat{color:var(--muted)}.small{font-size:12px}.insight-structure{margin:14px 0 6px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;color:var(--ink);font-size:13px;line-height:1.5}
+.oi-quads{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.oi-quad{border:1px solid var(--line);border-radius:8px;padding:11px 12px;font-size:11px;color:var(--muted);line-height:1.6}.oi-quad b{display:block;font-size:15px;margin:4px 0 2px;color:var(--ink)}.oi-quad b.up{color:var(--up)}.oi-quad b.down{color:var(--down)}.oi-quad.on{border-color:#4a5e76;background:#151d29}.oi-matrix{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font-size:11px;margin-top:8px}.oi-matrix div{padding:7px 9px;border:1px solid var(--line);border-radius:5px;color:var(--muted)}.oi-matrix .h{border:0;padding:7px 4px}.reading{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:10px;margin:10px 0 14px}.reading>div{border:1px solid var(--line);border-radius:8px;padding:11px 12px}.reading h4{font-size:11px;color:var(--muted);margin:0 0 6px;font-weight:600;letter-spacing:.5px}.reading ul{margin:0;padding-left:16px;font-size:12px;line-height:1.7;color:#c0ccdc}.reading .inf{border-color:#4a5e76;background:#151d29}.reading .inf ul{color:var(--ink)}.reading .lim ul{color:var(--muted);font-size:11px}@media(max-width:700px){.oi-quads,.reading{grid-template-columns:1fr}}
+.board td,.board th{padding:6px 7px;white-space:nowrap}.board td.mk{font-weight:600;color:var(--ink);border-right:1px solid var(--line)}.board tr.net td{border-bottom:1px solid var(--line)}.board tr.sub td{color:var(--muted);font-size:11px;border-bottom:0}.board .hl{background:#151d29}
+.tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button.active{border-color:var(--gold);color:var(--gold)}
+.manual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:10px}.manual-grid label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}.manual-grid input{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:7px 8px;font:inherit;min-width:0}
+.context-side{display:grid;gap:18px;min-width:0}.context-list{margin-top:8px}.context-row{display:flex;justify-content:space-between;gap:14px;padding:6px 0;line-height:1.6;border-bottom:1px solid #263141;font-size:12px}.context-row span:first-child{color:#bfc9d8}.context-row strong{white-space:nowrap;font-size:13px}.context-time{font-size:10px;color:var(--muted);margin-top:7px;line-height:1.6}.axis-table{margin-top:15px}.axis-table td,.axis-table th{padding:8px 5px}.axis-table td:last-child{white-space:nowrap}.context-more{margin:12px 0 16px}.context-more>summary{font-size:12px;color:#c0ccdc;padding:6px 0}.speed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.speed-box{border:1px solid var(--line);border-radius:8px;padding:13px}.speed-title{font-size:12px;color:var(--muted);margin-bottom:7px}.speed-head{font-size:14px;font-weight:650;line-height:1.7}.speed-numbers{font-size:12px;line-height:1.8;color:#c0ccdc;margin-top:6px}.reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}.context-legend{font-size:11px;line-height:1.7;color:var(--muted);margin-top:10px}.context-side .eyebrow{font-size:12px;letter-spacing:0}.hero>div{min-width:0}@media(max-width:700px){.context-side{margin-top:20px}.speed-grid,.reference-grid{grid-template-columns:1fr}.context-row{font-size:11px}.axis-table{min-width:460px}}
+.rebound-header{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.rebound-title{font-size:20px;font-weight:700;margin:9px 0}.rebound-steps{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.rebound-steps span{border:1px solid var(--line);border-radius:6px;padding:7px 11px;color:var(--muted);font-size:12px}.rebound-steps .active{border-color:var(--gold);color:var(--gold);background:#272319}.rebound-conditions td{line-height:1.7}.rebound-conditions small{display:block;color:var(--muted);font-size:11px}.rebound-diagnostics{font-size:12px;line-height:1.8}.rebound-diagnostics div{padding:4px 0}
+.sf-head{display:flex;justify-content:space-between;align-items:center;margin:14px 0 6px}
+</style><script src="/chart_recovery.js"></script></head><body>
+<header><div><div class="brand">DERIV <span>RADAR</span><small style="font-size:10px;letter-spacing:0;margin-left:12px;color:var(--muted)">02</small></div><div class="sub">파생 수급 레이더 · 시장의 변화부터</div></div><nav><a href="#today">파생 순매매</a><a href="#board">투자자 매매</a><a href="#close">마감 요약</a><a href="#insight">옵션 한눈에</a><a href="#flow">장중 흐름</a><a href="#oi">가격·미결제</a><a href="#options">옵션·포지션</a><a href="#events">관측 기록</a><a href="#connection">연결 상태</a></nav><div class="topright"><span id="mode" class="chip">연결 중</span><span id="clock" class="muted">—</span><button id="sound">알림음 켜기</button></div></header>
+<main class="container"><div id="banner" class="banner">대시보드 데이터를 기다립니다.</div>
+<section class="hero" aria-label="시간 구간별 시장 흐름"><div><div class="eyebrow">INTRADAY FLOW · 최근 5분 판정</div><h1 id="verdict">관측 대기</h1><div id="guide" class="guide">장중 수급과 가격의 동조를 확인합니다.</div><div class="scroller" id="axis-reasons"></div><div class="context-legend">순매수·순매도 사실과 기준 충족 여부를 구분합니다. 현물 수급과 프로그램은 겹칠 수 있습니다.</div><div id="turns" class="stack"></div><div id="confirm" class="note"></div></div><div class="context-side"><div><div class="eyebrow">당일 배경 · 관측값</div><div id="context-day" class="context-list">자료 수신 대기</div></div><div><div class="eyebrow">최근 15분 맥락</div><div id="context-15" class="context-list">15분 관측 대기</div></div><div id="context-stamp" class="context-time"></div></div></section>
+<details class="panel context-more" id="context-details"><summary>수급 속도·보조 지표·관측 상세</summary><div id="flow-speeds" class="speed-grid"></div><div class="context-legend">속도는 최근 약 5분과 그 앞의 약 10분을 겹치지 않게 비교합니다. 실제 원자료 경과 시간으로 계산하며, 속도 완화만으로 반등을 확정하지 않습니다.</div><h3 style="margin-top:20px">보조 지표</h3><div id="context-reference" class="reference-grid"></div><div id="reference-note" class="context-legend"></div><details style="margin-top:15px"><summary>전체 관측 문장</summary><ul id="facts" class="facts"></ul></details></details>
+<section class="panel" id="rebound"><div class="rebound-header"><h2>실시간 반등 감지</h2><span class="chip">실험 규칙 · 원인·신규/청산 식별 불가</span></div><div id="rebound-title" class="rebound-title">반등 판정 자료 대기</div><div id="rebound-steps" class="rebound-steps"></div><div id="rebound-summary" class="guide"></div><details style="margin-top:12px"><summary>단계별 충족 조건과 구간 자료 상태</summary><div id="rebound-conditions" class="scroller"></div><div id="rebound-diagnostics" class="rebound-diagnostics"></div></details><div id="rebound-note" class="note"></div></section>
+<section class="panel" id="gap-recovery"><div class="panel-head"><h2>끊긴 구간 · 과거 자료 복구</h2><span id="recovery-status" class="chip">대기</span></div><div id="recovery-summary" class="guide">누락 구간을 확인합니다.</div><div id="recovery-note" class="note"></div><div class="row-buttons"><button id="recover-button" type="button" onclick="requestRecovery()">오늘 누락 자료 복구</button><a class="button" href="/api/recovery.csv">복구 원자료 CSV</a><a class="button" href="#today-chart">상단 흐름에 복구 표시</a><a class="button" href="#pricechart">선물·지수 복구 차트</a></div><details style="margin-top:13px"><summary>복구 범위·지표별 자료 수</summary><div id="recovery-detail" class="scroller"></div><h3 style="margin-top:15px">외국인 현물 · LS KRX 사후 조회</h3><div id="recovery-spot"></div></details><div class="note">기존 실시간 기록과 판정은 그대로 유지합니다. 차트의 점선은 증권사 과거 조회로 보충한 자료입니다. 현물 재조회는 LS KRX 범위로 별도 표시하며, 이론 베이시스는 복원하지 않습니다.</div></section>
+<section id="cards" class="cards"></section>
+<section class="panel" id="today"><div class="panel-head"><h2>오늘 파생 수급 한눈에 · 누가 어느 쪽을 샀나(순매수 관측)</h2><span class="chip" id="today-chip">대기</span></div><div id="today-caution" class="note" style="margin:0 0 6px;color:var(--gold)"></div><div id="today-lines"></div><div id="today-est" class="td-oi" style="margin:8px 0"></div><div id="today-table" class="scroller" style="margin-top:6px"></div><div class="td-grid"><div><h3>기간 누적 순매매(보유량 아님)</h3><div id="today-cum" class="td-oi"></div></div><div><h3>변동성·옵션 구조(월물)</h3><div id="today-vol" class="td-oi"></div></div></div><div class="td-grid"><div><h3>외국인 장중 흐름</h3><div id="today-chart"></div><div id="today-recovery-note" class="note" style="margin-bottom:10px"></div><div class="legend"><b style="color:var(--gold)">선물 미니 환산 합계(계약 · 왼쪽 축)</b><b style="color:var(--green)">옵션 콜−풋 순매수대금(억 · 오른쪽 축)</b><b id="today-recovery-legend" hidden style="color:var(--muted)">┄ 점선 = 사후 복구(노란 같은 기준 · 초록 위클리 제외 · 보라 일반선물만)</b></div></div><div><h3>미결제가 늘어난 외가 행사가</h3><div id="today-oi" class="td-oi"></div><div id="today-weekly" class="td-oi" style="margin-top:10px"></div></div></div><div id="today-note" class="note"></div><details style="margin-top:12px"><summary>읽는 법</summary><div class="note">· 한투 시장별 투자자매매동향을 장중(09:00~15:50) 1분마다 받습니다. 16:15 뒤에 그날 마지막 값을 한 번 더 받습니다.<br>· <b>선물</b>은 일반선물에 미니선물(승수 1/5)을 0.2배로 더한 계약 수입니다. 일반·미니가 반대로 움직이면 괄호 안 숫자를 보세요.<br>· <b>옵션</b>은 당일 순매수 <b>금액</b>(프리미엄, 억원)입니다. 콜−풋이 +면 '콜 대금 우위', −면 '풋 대금 우위'라고만 씁니다. 프리미엄은 델타와 달라서 대금 차이의 부호와 실제 상승·하락 노출의 부호가 반대일 수 있습니다(예: 비싼 콜 1계약 매수 + 싼 풋 10계약 매수). 콜·풋 동반 순매수·순매도도 여러 계좌·만기·청산이 섞인 결과라 전략을 단정하지 않습니다. 보유 포지션이나 손익이 아닙니다.<br>· 필수 시장(선물·미니선물, 월물·위클리 월·위클리 목·미니 콜·풋) 중 하나라도 빠지거나 조회 시각이 30초 넘게 벌어지면 합계와 판정을 비우고 '판정 보류'로 표시합니다. 표의 '부분'은 받은 시장만 더한 값으로 전체 합계가 아닙니다.<br>· 월물만 보면 큰 흐름을 놓칩니다. 위클리(월·목)와 미니옵션까지 합쳐 계산하고, 표 아래 작은 글씨에 나눠 보여 줍니다.<br>· 판단 기준은 같은 시각 과거 분포(한투 기록이 20거래일 이상 쌓이면 자동) → LS 일별 확정 이력 → 고정 초기값(선물 ±300계약·옵션 ±20억) 순으로 씁니다. 각 줄 아래 '판단 기준'에 무엇을 썼는지 나옵니다. 판정이 바뀔 때마다 관측 기록에 남겨 5~60분 뒤 지수 변화로 검증합니다. 선물과 옵션이 엇갈리면 판단을 보류합니다. 판정 문구는 예측이 아니라 검증 중인 가설입니다.<br>· 행사가별 미결제 변화는 LS 옵션 전광판(장중 5분) 조회로 계산합니다. 전 거래일 마지막 조회 대비, 지수 ±7% 안에서 콜은 지수 위·풋은 지수 아래 행사가만 봅니다. 미결제는 매수·매도 양쪽이 함께 만드는 값이라 누가 팔았는지, 딜러 감마가 어느 쪽인지 알 수 없습니다. 지지·저항으로 작동하는지는 검증 전 가설입니다.<br>· 누적 포지션은 LS t1665 일별 확정 순매수의 합입니다. 거래소는 투자자별 미결제를 공개하지 않아 어느 증권사 화면이든 '포지션'은 추정입니다. 20일 누적이 보관 기간 분포의 상·하위 10%면 '극단'으로 표시합니다(실무 경험칙이며 통계 검증 전).<br>· 외국인 옵션 매매와 미결제: 외국인 순매수 방향과 그 상품 전체 미결제 증감을 나란히 적기만 합니다. 시장 전체 미결제에는 모든 투자자의 거래가 섞여 있어 외국인이 신규로 샀는지 매도분을 되샀는지 구분할 수 없습니다(같은 숫자를 만드는 반례가 있음).<br>· 마감 요약·일별 기록·누적은 모두 LS t1665 일별 확정치를 기준으로 맞춥니다. 장중에 저장된 잠정값은 지우지 않고 따로(*_intraday) 남깁니다.<br>· 2026-10-22 마감 값으로 대조: 선물 투자자 4개 값이 LS와 한투에서 같았고, LS 옵션 시장구분 5가 풋·6이 콜임을 한투 이름표로 확인했습니다.</div></details></section><section class="panel" id="board"><div class="panel-head"><h2>투자자 매매현황 · 통합(KRX+NXT)</h2><span class="chip" id="board-chip">대기</span></div><div class="row-buttons" style="margin:0 0 10px"><label class="small muted"><input type="checkbox" id="board-detail" onchange="lastState&&renderBoard(lastState.investor_board)"> 매도·매수도 보기</label></div><div id="board-table" class="scroller"></div><div id="board-note" class="note"></div></section><section class="panel" id="close"><div class="panel-head"><h2>마감 요약 · 오늘 하루 결과</h2><span class="chip" id="close-chip">대기</span></div><div id="close-head" class="insight-structure"></div><div id="close-notes"></div><div id="close-reading" class="reading"></div><div id="close-swing-title" class="insight-structure" style="margin-bottom:0"></div><div id="close-swing" class="reading"></div><div id="close-options" class="insight-list"></div><details style="margin-top:12px" open><summary>최근 날짜별 기록</summary><div id="close-table" class="scroller"></div></details><details style="margin-top:8px"><summary>읽는 법</summary><div class="note">· 장이 끝나면 LS에서 선물 투자자 마감 값을 자동으로 받아 날짜별로 저장합니다. 저녁에 켜도 되고 휴장일에도 마지막 거래일 값이 저장됩니다.<br>· <b>확정 추정</b>은 마지막 변화 뒤 20분 이상 값이 그대로일 때만 붙입니다. 2026-10-16은 마감 직후 외국인 −6,398계약이 16시 이후 −4,200계약으로 바뀌었습니다. <b>잠정</b> 표시가 있으면 나중에 다시 보세요.<br>· 현물은 프로그램이 켜져 있던 장중 마지막 기록이라 그날 실행하지 않았으면 비어 있습니다. 옵션도 그날 조회한 경우에만 붙습니다.<br>· 선물은 계약 기준으로 판단하고 억원은 참고입니다. 하루 값으로 내일 방향을 단정하지 말고, 며칠 이어지는 방향인지 표에서 보세요.<br>· 선물가격·미결제 칸은 2026-10-22부터 쌓입니다(그 전 날짜는 기록이 없어 비어 있음). 선물 장(15:45) 마감 후 LS 조회값을 우선 쓰고, 없으면 장중 마지막 기록을 씁니다.<br>· <b>장중 반전</b>은 당일 순매매만으로 안 보이는 누적 순매수의 큰 증감(예: 7/24 −13,460 → −759계약, 그 사이 신규 매수인지 숏 청산인지는 구분 불가)을 LS 시간대별 값에서 찾아, 그 시각 이후의 미결제·가격 변화와 엮어 봅니다. 그 시각 미결제는 프로그램이 장중에 켜져 있었을 때만 있습니다.<br>· 사실/추론/한계는 외국인 선물 순매매와 시장 전체 미결제·가격이 함께 어떻게 움직였는지를 적습니다. 미결제는 시장 전체 값이라 외국인의 신규·청산, 실제 거래 상대방, 가격을 움직인 주체는 식별하지 않습니다.</div></details></section><section class="panel" id="insight"><div class="panel-head"><h2>월물 옵션 시장 · 미결제와 순매매</h2><span class="chip" id="insight-time">대기</span></div><div id="insight-who" class="insight-list"></div><div id="insight-structure" class="insight-structure"></div><div id="insight-chart"></div><div class="legend"><b class="up">콜 미결제(저항 가설)</b><b class="down">풋 미결제(지지 가설)</b><b style="color:var(--gold)">│ 현재 지수</b></div><details style="margin-top:12px"><summary>읽는 법</summary><div class="note">· "선물 ○○계약 매도 효과" = 그 투자자의 오늘 옵션 매매가 지수 하락에 거는 크기를 선물 계약 수로 바꾼 값입니다. 범위는 계산 방식 두 가지(키움 델타 / 내재변동성 기반)의 차이입니다.<br>· 보유 포지션이 아니라 <b>오늘 하루 순매매의 현재 환산값</b>입니다. 조회된 월물·행사가 범위만 포함합니다. 이 패널의 '선물+옵션 합산'은 행사가별 옵션 자료(키움 OCX · 현재 꺼짐)가 있고 0780 선물 값을 옵션 조회 10분 안에 입력했을 때만 계산합니다. 선물 수급 자체는 LS·한투에서 자동 수집되어 맨 위 '오늘 파생 수급' 패널에 나옵니다.<br>· 변화 칸의 '재평가'는 새 매매 없이 지수가 움직여 환산값만 바뀐 부분입니다. '매매'가 커야 실제로 베팅이 늘어난 것입니다.<br>· 누락이 있거나, 두 계산 방식의 방향이 다르거나, 조회가 늦으면 방향을 말하지 않고 '보류'로 표시합니다.<br>· 저항·지지 후보는 지수 ±7% 안에서 미결제약정이 가장 많이 쌓인 행사가입니다. 만기가 가까울수록 지수가 끌려가는 경향이 있다는 가설이며 검증된 예측은 아닙니다. max pain도 KOSPI200에서 예측력을 실증한 연구를 찾지 못해 참고로만 표시합니다. 만기일 효과 연구(Chay·Ryu 2006)는 2003년 예상가 공개 이후 효과가 줄었다고 보고합니다(Chay·Kim 2013).</div></details><details style="margin-top:8px"><summary>자세히 (계산 근거)</summary><div id="insight-detail" class="scroller"></div><div id="insight-note" class="note"></div></details></section><section class="grid" id="flow"><div>
+<div class="panel"><div class="panel-head"><h2>외국인 선물과 지수</h2><span class="chip">당일 누적 ≠ 최근 유입</span></div><div class="legend"><b class="up">외국인 선물 당일 누적 · 왼쪽 계약</b><b class="gold">KOSPI200 · 오른쪽 지수</b></div><div id="pricechart"></div><div class="note">선물 누적이 마이너스여도 최근 매수가 유입될 수 있습니다. 사후 복구 자료는 같은 색 점선·점으로 표시합니다. 아직 자료가 없는 구간은 선을 연결하지 않습니다.</div></div>
+<div class="panel" id="oi"><div class="panel-head"><h2>선물 가격과 미결제 흐름</h2><span class="chip" id="oi-chip">시장 전체 미결제</span></div><div id="oi-quads" class="oi-quads"></div><div class="panel-head" style="margin:4px 0 0"><h3 style="margin:0">외국인 수급과 엮은 해석</h3><div id="reading-tabs" class="tabs" style="margin:0"></div></div><div id="oi-reading" class="reading"></div><div class="legend"><b style="color:var(--green)">시장 전체 선물 미결제 · 왼쪽 계약</b><b class="gold">근월 선물 가격 · 오른쪽 p</b></div><div id="oichart"></div><div class="note">점선·점은 증권사 과거 조회로 복구한 자료입니다.</div><div id="oi-note" class="note"></div><details style="margin-top:10px"><summary>읽는 법</summary><div class="oi-matrix"><div class="h"></div><div class="h">미결제 ↑</div><div class="h">미결제 ↓</div><div class="h">가격 ↑</div><div><b class="up">가격↑·미결제↑</b><br>시장 전체 새 계약 증가 속 상승</div><div><b class="up">가격↑·미결제↓</b><br>시장 전체 청산 속 상승(숏커버 가능)</div><div class="h">가격 ↓</div><div><b class="down">가격↓·미결제↑</b><br>시장 전체 새 계약 증가 속 하락</div><div><b class="down">가격↓·미결제↓</b><br>시장 전체 청산 속 하락(롱 정리 가능)</div></div><div class="note">· 미결제는 매수·매도 양쪽이 같이 늘고 줄어드는 <b>시장 전체</b> 값이라, 어느 쪽이 주도했는지의 '모양'만 보여 줍니다. 외국인이 신규로 샀는지 청산했는지는 이 표만으로 알 수 없습니다. 카드 아래의 같은 구간 외국인 선물 수량과 함께 보세요.<br>· 같은 방향이라도 신규(미결제↑) 쪽이 청산(미결제↓) 쪽보다 흐름이 이어질 가능성이 높다는 것이 통상적인 해석이지만, 이 프로그램에서 검증한 결과는 아닙니다.<br>· 가격이나 미결제가 기준보다 적게 움직이면 '변화 작음'으로 두고 방향을 붙이지 않습니다. 기준은 아래 '현재 관측 기준 보기'의 price_oi에 있습니다.<br>· 만기 1~2주 전에는 근월물에서 원월물로 옮기는 롤오버 때문에 근월 미결제가 줄어 청산처럼 보일 수 있습니다.</div></details></div>
+<div class="panel"><div class="panel-head"><h2>외국인·기관 흐름 비교</h2><span class="chip">금융투자는 기관계에 포함</span></div><div class="scroller"><table><thead><tr><th>주체</th><th class="r">선물 당일<br>계약</th><th class="r">선물 5 / 15분<br>계약</th><th class="r">현물 당일<br>억원</th><th class="r">현물 5 / 15분<br>억원</th></tr></thead><tbody id="flows"></tbody></table></div><div class="note" id="flows-basis"></div><div class="note">금융투자 행은 기관계의 하위 항목입니다. 두 값을 합산하지 않습니다. 모든 수급은 순매매이며 실제 보유량이 아닙니다.</div><form id="hts0780" onsubmit="submit0780(event)"><div class="note">선물 투자자 수급은 <b>LS증권 t1602로 장중 30초마다 자동 수집</b>합니다(계약·억원). 아래 칸은 LS가 끊겼을 때만 쓰는 예비 입력입니다. 영웅문 <b>[0780]</b>을 [조회]한 직후 선물 순매수(계약)를 넣으세요.</div><div class="manual-grid"><label>조회 시각<input id="m-time" type="time" required></label><label>외국인<input id="m-foreign" inputmode="numeric" placeholder="-1234"></label><label>기관계<input id="m-inst" inputmode="numeric"></label><label>개인<input id="m-ind" inputmode="numeric"></label><label>금융투자<input id="m-fin" inputmode="numeric"></label></div><div class="row-buttons"><button type="submit">0780 값 입력</button><button type="button" onclick="$('m-time').value=nowHM()">지금 시각</button></div></form></div>
+</div><div>
+<div class="panel"><div class="panel-head"><h2>프로그램 매매 유입</h2><span class="chip">KRX 코스피</span></div><div class="legend"><b class="up">비차익 당일 누적 · 억원</b><b class="gold">전체 프로그램 당일 누적 · 억원</b></div><div id="programchart"></div><div class="mini" id="programstats"></div><div class="note">점선·점은 사후 복구 자료입니다. 이전 5분 매도와 최근 5분 매수를 비교합니다. 당일 순매수 금액의 0 돌파를 기다리지 않습니다.</div></div>
+<div class="panel"><div class="panel-head"><h2>관심종목 확인</h2><span class="chip">시장 흐름 → 종목 확인</span></div><div class="scroller"><table><thead><tr><th>종목</th><th class="r">등락</th><th class="r">외국인<br>억원</th><th class="r">기관<br>억원</th></tr></thead><tbody id="stocks"></tbody></table></div><div class="sf-head"><b>주식선물 근월물</b><span id="sf-chip" class="chip">대기</span></div><div class="scroller"><table><thead><tr><th>종목</th><th class="r">선물가<br>현물가</th><th class="r">시장−이론<br>베이시스</th><th class="r">미결제<br>증감</th><th class="r">외국계 창구<br>현물 순매수</th></tr></thead><tbody id="sfutures"></tbody></table></div><div class="note" id="sf-note">시장−이론 베이시스가 +면 선물이 이론가보다 비싸게(선물 매수 우위), −면 싸게 거래됐다는 뜻입니다. 종목별 투자자 수급은 증권사 API에서 제공되지 않아 넣지 않았습니다. 이론가는 배당 예상을 포함해 배당 시즌에 크게 흔들립니다.</div><div class="note">관심종목의 외국인·기관계 순매수(억원)입니다. 장중 값은 거래소 가집계라 하루 몇 번(대략 09:30 외국인·10:00·11:30·13:20·14:30)만 바뀌고, 그 사이에는 값이 그대로입니다. 장 마감 뒤에는 장 마감 집계(키움 ka10059)로 바뀝니다. 지수 수급으로 개별 종목의 매수 시점을 확정하지 않습니다. 종목은 config.json의 watchlist에서 변경합니다.</div></div>
+</div></section>
+<section class="panel" id="snapshots"><div class="panel-head"><h2>마지막 조회 시세</h2><span class="chip">실시간 흐름과 별도</span></div><div id="snapshotbody" class="guide">로그인 후 선물·옵션 시세를 조회합니다. 투자자별 선물 수급은 아직 연결되지 않았습니다.</div><div class="note">조회 시각은 체결 시각이 아닙니다. 이 값으로 장중 전환 신호를 만들지 않습니다.</div></section><section class="panel" id="investor-options"><div class="panel-head"><h2>옵션 투자자별 순매수 · 콜·풋 합계</h2><span class="chip">LS t1602 · 5분 주기 조회</span></div><div id="investor-tabs" class="tabs"></div><div id="investor-summary" class="guide"></div><details style="margin-top:16px"><summary>행사가별 수량 (키움 OCX 연결 시에만)</summary><div id="investor-detail" class="scroller"></div></details><div class="note">조회 범위의 순매매 계약수입니다. 금융투자는 기관계 전체와 다르며, 옵션 수량을 선물 수급이나 보유 포지션으로 사용하지 않습니다.</div></section><section class="grid" id="options"><div class="panel"><div class="panel-head"><h2>행사가별 미결제 분포</h2><span id="optmonth" class="chip">옵션 대기</span></div><div class="legend"><b class="up">콜 전체 미결제</b><b class="down">풋 전체 미결제</b></div><div id="optionchart"></div><div id="optinfo" class="note"></div></div><div class="panel"><div class="panel-head"><h2>추정 포지션 손익 곡선</h2><span class="chip">미연결 · 증권사 추정 보유량 CSV 필요</span></div><select id="positiongroup"></select><div id="positionstats" class="stack"></div><div id="positionchart"></div><div id="positionnote" class="note"></div><div class="row-buttons"><button onclick="importCSV('positions')">추정 포지션 CSV 연결</button><button onclick="importCSV('flows')">HTS 수급 CSV 연결</button></div></div></section>
+<section class="panel" id="events"><div class="panel-head"><h2>흐름 관측과 이후 수익률</h2><a class="button" href="/api/events.csv" download="radar_events.csv">기록 CSV 내보내기</a></div><div id="eventstats" class="stack"></div><div class="scroller"><table class="signal-table"><thead><tr><th>한국시간</th><th>관측 / 당시 근거</th><th class="r">지수</th><th class="r">5분 후</th><th class="r">15분 후</th><th class="r">30분 후</th><th class="r">60분 후</th></tr></thead><tbody id="eventsbody"></tbody></table></div><div class="note">관측 이후 가격만 평가합니다. 결측 구간은 제외하며 수수료·슬리피지는 미반영입니다. 가상 데모는 예측력이나 실제 수익의 증거가 아닙니다.</div></section>
+<section class="grid" id="connection"><div class="panel"><div class="panel-head"><h2>수신 상태와 데이터 출처</h2><span class="chip">파일 갱신 시각과 별도 확인</span></div><div id="connections" class="source-status"></div><div class="quality-grid" id="quality"></div></div><div class="panel"><div class="panel-head"><h2>누적·연결 설정</h2><span class="chip">기존 키움 연결 재사용</span></div><div id="cumulative" class="guide"></div><div class="note">현물 투자자·등락 종목·관심종목은 키움 REST API를 사용합니다. 프로그램 매매, 선물·옵션 시세, 선물·옵션 투자자 수급은 LS증권 OPEN API를 사용합니다(로그인 창 없음). 프로그램을 키움으로 되돌리려면 config.json의 ls.program을 false로 바꿉니다.</div><details style="margin-top:20px"><summary>투자자별 파생 TR 연결</summary><p class="note">Open API+에서 제공되는 TR은 설치된 공식 명세와 실제 응답으로 확인합니다. 입력 enum이나 서버 지원은 추정하지 않습니다. 아래 명세를 보고 입력값·출력 필드·단위를 연결하세요. sources가 비어 있으면 해당 파생 수급은 ‘미연결’로 표시합니다.</p><button style="margin-top:12px" onclick="loadCatalog()">설치된 TR 명세 보기</button><select style="display:block;margin-top:12px" id="trselect"></select><pre id="trspec"></pre><textarea id="sources" spellcheck="false" aria-label="투자자 TR 설정"></textarea><button style="margin-top:12px" onclick="saveSources()">검증한 TR 설정 저장</button><p class="note">source 예시와 단위 환산은 README.md를 참고하세요. 저장한 설정은 키움 OCX 수집기를 다시 켤 때 적용됩니다(현재 OCX를 끈 상태면 적용되지 않음). 응답은 data/tr_result_*.json에 남습니다.</p></details><details style="margin-top:20px"><summary>현재 관측 기준 보기</summary><pre id="thresholds"></pre><div class="note">초기 기준은 예측력이 검증된 값이 아닙니다. 기준 변경 시 기록에 설정값이 함께 저장됩니다.</div></details></div></section>
+<div class="footer">DERIV RADAR 2.0 · 실측 수급 → 흐름 변화 → 종목 확인 → 관측 결과 기록<br>실제 보유 잔고와 거래 목적을 알 수 없는 항목은 추정으로 구분합니다. 자동 주문은 실행하지 않습니다.</div></main><div id="toast" class="toast hidden" role="status"></div>
+<script src="/review_ui.js"></script>
+<script>
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';let token='',lastState=null,sound=false,lastEvent='',catalog=[];
+const known=v=>v!==null&&v!==undefined&&Number.isFinite(Number(v));
+const fmt=(v,d=0)=>known(v)?Number(v).toLocaleString('ko-KR',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
+const signed=(v,d=0)=>known(v)?(v>0?'+':'')+fmt(v,d):'—';const color=v=>!known(v)?'muted':v>0?'up':v<0?'down':'muted';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const tm=t=>t?String(t).slice(11,16):'—';
+function notice(text){$('toast').textContent=text;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),5500)}
+function empty(id,text){$(id).innerHTML='<div class="empty">'+esc(text)+'</div>'}
+function node(tag,attrs,parent,text){const n=document.createElementNS(NS,tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;if(parent)parent.append(n);return n}
+function chart(id,series,dual=false){const W=650,H=210,pad={l:56,r:dual?58:16,t:12,b:28};$(id).innerHTML='';const svg=node('svg',{viewBox:`0 0 ${W} ${H}`,class:'chart',role:'img','aria-label':id},$(id));
+const length=Math.max(...series.map(s=>s.points.length),0);if(!length){empty(id,'관측이 쌓이면 시계열이 표시됩니다.');return}
+const all=series.flatMap(s=>s.points.map(p=>p.v)).filter(known);if(!all.length){empty(id,'데이터 연결 후 표시됩니다.');return}
+const limits=series.map((s,index)=>{const a=(dual?series.filter((other,i)=>(other.axis??i)===(s.axis??index)).flatMap(other=>other.points.map(p=>p.v)):all).filter(known);let lo=Math.min(...a),hi=Math.max(...a);if(!a.length)return[0,1];if(lo===hi){lo-=1;hi+=1}return[lo,hi]});
+const x=i=>pad.l+i*(W-pad.l-pad.r)/Math.max(length-1,1);
+// 모든 점에 관측 시각(at)이 있으면 가로축을 실제 경과 시간으로 그린다(빈 구간이 좁혀 보이지 않게).
+const ts=series.flatMap(s=>s.points.map(p=>p.at?Date.parse(p.at):NaN)),timeAxis=ts.length>1&&ts.every(t=>!isNaN(t)),t0=timeAxis?Math.min(...ts):0,t1=timeAxis?Math.max(...ts):1;
+const xp=(p,i)=>timeAxis?pad.l+(Date.parse(p.at)-t0)/Math.max(t1-t0,1)*(W-pad.l-pad.r):x(i);
+series.forEach((s,j)=>{const[lo,hi]=limits[j],y=v=>pad.t+(hi-v)/(hi-lo)*(H-pad.t-pad.b);
+if(j===0||(dual&&j===1))for(let k=0;k<=3;k++){const v=lo+(hi-lo)*k/3;node('line',{x1:pad.l,x2:W-pad.r,y1:y(v),y2:y(v),class:'gridline'},svg);node('text',{x:j===0?pad.l-6:W-pad.r+7,y:y(v)+3,'text-anchor':j===0?'end':'start'},svg,fmt(v,s.decimals??0))}
+const runs=RecoveryCharts.runs(s.points.map((p,i)=>({...p,index:i})));const d=runs.map(run=>run.map((p,i)=>(i?'L':'M')+xp(p,p.index).toFixed(2)+' '+y(p.v).toFixed(2)).join(' ')).join(' ');const path=node('path',{d,fill:'none',stroke:s.color,'stroke-width':2,'stroke-linejoin':'round','stroke-dasharray':s.recovered?'5 4':'none','data-provenance':s.recovered?'recovered':'observed'},svg);node('title',{},path,s.label||(s.recovered?'증권사 과거 조회 · 사후 복구':'수집 당시 관측'));
+// A path with only M is invisible. Keep isolated recovered minutes visible too.
+for(const run of runs)for(const p of (s.recovered?run:run.length===1?run:[])){const dot=node('circle',{cx:xp(p,p.index).toFixed(2),cy:y(p.v).toFixed(2),r:s.recovered?2:2.4,fill:s.color,'data-provenance':s.recovered?'recovered':'observed'},svg);node('title',{},dot,(s.label||(s.recovered?'사후 복구':'수집 당시 관측'))+' · '+tm(p.at)+' · '+fmt(p.v,s.decimals??0))}
+if(j===0){const step=Math.max(1,Math.ceil(length/6));s.points.forEach((p,i)=>{if(i%step===0||i===length-1)node('text',{x:xp(p,i),y:H-7,'text-anchor':'middle'},svg,p.label??tm(p.at))})}})}
+function renderFlowExplanation(D,closed){
+const X=D.flow_explanation;
+if(!X){$('axis-reasons').textContent='판정 근거는 새 자료 수신 후 표시됩니다.';for(const id of ['context-day','context-15','context-reference'])$(id).textContent='이 저장본에는 구간별 설명이 없습니다.';$('flow-speeds').textContent='속도 비교 자료 대기';$('context-stamp').textContent='';$('reference-note').textContent='베이시스·15분 가격·미결제는 현재 5분 동조 판정의 참고 정보입니다.';return}
+const rows=items=>items.map(r=>'<div class="context-row" title="'+esc((r.source||'출처 대기')+' · 원자료 '+(r.asof||'시각 없음'))+'"><span>'+esc(r.name)+'</span><strong class="num '+(r.absolute?'':color(r.value))+'">'+(r.absolute?fmt:signed)(r.value,r.unit==='계약'?0:r.unit==='억원'?1:2)+' <small>'+esc(r.unit)+'</small></strong></div>').join('');
+$('context-day').innerHTML=rows(X.day);$('context-15').innerHTML=rows(X.m15)+X.speeds.filter(s=>s.available).map(s=>'<div class="context-legend">'+esc(s.name+' · '+s.text)+'<br><span class="context-time">앞선 구간 평균과 비교 · 수급 속도 상세에서 수치 확인</span></div>').join('');$('context-reference').innerHTML=rows(X.reference);
+$('context-stamp').textContent=(closed?'마지막 계산 기준 ':'계산 기준 ')+String(X.asof).slice(0,10)+' '+tm(X.asof)+' KST · 누적 수급은 보유량이 아닙니다. —는 해당 구간의 유효 자료 부족입니다. 각 항목에 마우스를 올리면 출처·원자료 시각을 확인할 수 있습니다.';
+const windowNote=w=>w?.status==='ready'?'<small class="context-time" style="display:block;font-weight:400" title="'+esc('원자료 '+w.start_at+' → '+w.end_at)+'">실제 '+fmt(w.actual_minutes,2)+'분'+(w.fallback_used?' · 이전 유효 기준점':'')+'</small>':'';
+$('axis-reasons').innerHTML='<table class="axis-table"><caption class="context-time" style="text-align:left">최근 5분 판정 근거 · '+esc(tm(X.asof))+' 기준</caption><thead><tr><th>실제 판정 지표</th><th class="r">5분 변화</th><th class="r">기준</th><th>결과</th></tr></thead><tbody>'+X.m5.axes.map(a=>'<tr title="'+esc((a.source||'출처 대기')+' · '+(a.asof||'시각 없음'))+'"><td>'+esc(a.name)+'</td><td class="r num '+color(a.value)+'">'+signed(a.value,a.unit==='%'?2:a.unit==='억원'?1:0)+' '+esc(a.unit)+windowNote(a.window)+'</td><td class="r num">±'+fmt(a.threshold,a.unit==='%'?2:0)+'</td><td>'+esc(a.state)+'</td></tr>').join('')+'</tbody></table>';
+$('flow-speeds').innerHTML=X.speeds.map(s=>'<div class="speed-box"><div class="speed-title">'+esc(s.name)+'</div><div class="speed-head">'+esc(s.available?s.text:'속도 비교 불가')+'</div>'+(s.available?'<div class="speed-numbers">앞선 '+fmt(s.prior_minutes,1)+'분 '+signed(s.prior,1)+'억원 · 분당 '+signed(s.prior_rate,1)+'억원<br>최근 '+fmt(s.recent_minutes,1)+'분 '+signed(s.recent,1)+'억원 · 분당 '+signed(s.recent_rate,1)+'억원</div><div class="context-time">'+esc(tm(s.start_at)+' → '+tm(s.boundary_at)+' → '+tm(s.end_at))+' KST · '+esc(s.source)+'</div>':'<div class="context-time">'+esc(s.reason)+'</div>')+'</div>').join('');
+$('reference-note').textContent=X.reference_note;
+if(!closed){$('verdict').textContent=X.m5.title;$('guide').textContent=X.m5.summary;}
+}
+function renderRebound(D){
+const R=D.rebound;if(!R){$('rebound-title').textContent='이 저장본에는 반등 판정 기록이 없습니다.';for(const id of ['rebound-steps','rebound-summary','rebound-conditions','rebound-diagnostics','rebound-note'])$(id).textContent='';return}
+const archived=!D.session&&D.mode!=='demo';$('rebound-title').textContent=archived?'저장 당시 관측 · '+R.title:R.title;
+$('rebound-steps').innerHTML=['1차 · 반등 조짐','2차 · 반등 확인','3차 · 지속성 확인'].map((s,i)=>'<span class="'+(R.active&&R.stage>=i+1?'active':'')+'">'+esc(s)+'</span>').join('');
+const next=Math.min(R.stage+1,3), pending=R.conditions.filter(c=>c.stage<=next&&c.passed!==true);$('rebound-summary').textContent=(R.stage>=2?'지속 관측 '+fmt(R.held_minutes,1)+' / '+R.confirm_minutes+'분 · ':'')+(pending.length?pending.map(c=>c.name+': '+(c.passed===null?'자료 부족':'미충족')).join(' / '):R.confirmed?'확인 조건이 유지됐습니다. 관측 기록에서 이후 결과를 확인할 수 있습니다.':'조건 유지와 새 관측을 확인하고 있습니다.');
+$('rebound-conditions').innerHTML='<table class="rebound-conditions"><thead><tr><th>단계</th><th>조건 / 기준</th><th>상태</th></tr></thead><tbody>'+R.conditions.map(c=>'<tr><td>'+c.stage+'차</td><td>'+esc(c.name)+'<small>'+esc(c.text)+'</small></td><td>'+ (c.passed===null?'자료 부족':c.passed?'충족':'미충족')+'</td></tr>').join('')+'</tbody></table>';
+const names={foreign_fut_qty:'외국인 선물',foreign_spot_amt:'외국인 현물',nonarb_amt:'비차익 프로그램',k200:'KOSPI200',basis_residual:'베이시스 변화'};$('rebound-diagnostics').innerHTML='<h3 style="margin-top:16px">5·15분 계산 상태</h3>'+R.diagnostics.map(d=>'<div>'+esc(names[d.key]+' '+(d.window==='m5'?'5분':'15분')+' · '+d.reason)+'</div>').join('');$('rebound-note').textContent=R.note+' · 계산 시각 '+String(D.generated_at).slice(0,19).replace('T',' ')+' KST';
+}
+function renderRecovery(D){
+const R=D.recovery;if(!R){$('recovery-status').textContent='자료 대기';$('recovery-summary').textContent='실시간 실행에서 누락 구간을 확인합니다.';return}
+$('recovery-status').textContent=R.status;const count=(R.history||[]).length;$('recovery-summary').textContent=(R.day||'')+' · 과거 자료가 보충된 '+count+'분 · '+Object.keys(R.counts||{}).length+'개 지표';$('recovery-note').textContent=R.note||'복구 자료는 현재 반등 판정에 소급 적용하지 않습니다.';$('recover-button').disabled=D.mode!=='live'||R.status==='복구 조회 중';
+const names={k200:'KOSPI200',fut_price:'선물 가격',fut_oi:'선물 미결제',fut_oi_prev:'미결제 전일 대비',fut_prev_close:'선물 전일 종가',foreign_fut_qty:'외국인 선물 계약',foreign_fut_amt:'외국인 선물 금액',inst_fut_qty:'기관계 선물 계약',inst_fut_amt:'기관계 선물 금액',individual_fut_qty:'개인 선물 계약',individual_fut_amt:'개인 선물 금액',financial_fut_qty:'금융투자 선물 계약',financial_fut_amt:'금융투자 선물 금액',nonarb_amt:'비차익 프로그램',arb_amt:'차익 프로그램',program_amt:'전체 프로그램',foreign_spot_krx_amt:'외국인 현물 · LS KRX',inst_spot_krx_amt:'기관계 현물 · LS KRX',individual_spot_krx_amt:'개인 현물 · LS KRX',financial_spot_krx_amt:'금융투자 현물 · LS KRX',basis:'시장 베이시스'};
+const J=R.last_report||R.jobs?.[0];$('recovery-detail').innerHTML=(J?'<div class="note">요청 구간 '+esc((J.ranges||[]).map(r=>r.join('~')).join(' / '))+' · 조회 '+esc(tm(J.retrieved_at))+' · 이번 추가 '+fmt(J.added_fields)+'개 값 · 주요 지표 미확보 '+fmt(J.missing_primary)+'개 값'+(Object.keys(J.failures||{}).length?'<br>조회 미완료: '+esc(Object.entries(J.failures).map(([k,v])=>k+' '+v).join(' / ')):'')+'</div>':'')+'<table><thead><tr><th>지표 / 출처 범위</th><th class="r">보충된 분 수</th></tr></thead><tbody>'+Object.entries(R.counts||{}).map(([k,n])=>'<tr><td>'+esc(names[k]||k)+'</td><td class="r num">'+fmt(n)+'</td></tr>').join('')+'</tbody></table><h3 style="margin-top:15px">최근 복구 작업</h3><table><thead><tr><th>조회 / 구간</th><th>추가 값</th><th>주요 지표 미확보</th></tr></thead><tbody>'+(R.jobs||[]).map(j=>'<tr><td>'+esc(tm(j.retrieved_at)+' · '+(j.ranges||[]).map(r=>r.join('~')).join(' / '))+'</td><td>'+fmt(j.added_fields)+'</td><td>'+fmt(j.missing_primary)+'</td></tr>').join('')+'</tbody></table>';
+chart('recovery-spot',[{color:'#73d9b6',recovered:true,points:(R.history||[]).map(h=>({at:h.at,v:h.values.foreign_spot_krx_amt}))}]);
+}
+async function requestRecovery(){try{const r=await request('/api/recovery',{});notice(r.message);refresh()}catch(e){notice(e.message)}}
+let isClosed=false;
+// 장외에는 '당일' 값이 장중 마지막 관측(잠정)임을 날짜·시각과 함께 밝힌다. 마감 확정치는 마감 요약 패널에 있다.
+function dayFlow(r,closed){const v=signed(r.value)+'계약';if(!closed||!r.at)return '당일 '+v;return '장중 마지막 '+String(r.at).slice(5,10).replace('-','/')+' '+tm(r.at)+' '+v+' · 잠정(마감 확정치는 마감 요약)'}
+
+/* DERIV_RADAR_FOREIGN_ALIGNMENT_V1 */
+const DerivFlowAlignment = (() => {
+  const minute = 60_000;
+  const tolerance = 75_000;
+  const maxAge = 120_000;
+  const groups = [
+    ['월물', 'call', 'put'],
+    ['위클리(월)', 'wk_mon_call', 'wk_mon_put'],
+    ['위클리(목)', 'wk_thu_call', 'wk_thu_put'],
+    ['미니옵션', 'mini_call', 'mini_put'],
+  ];
+  const recent = new Map();
+  let day = null;
+  let waitingReason = '';
+  const isNumber = value => typeof value === 'number' && Number.isFinite(value);
+  const numeric = value => {
+    if (isNumber(value)) return value;
+    if (typeof value !== 'string' || !value.trim()) return null;
+    const parsed = Number(value);
+    return isNumber(parsed) ? parsed : null;
+  };
+  const add = (a, b) => isNumber(a) && isNumber(b) ? a + b : null;
+  const diff = (a, b) => isNumber(a) && isNumber(b) ? a - b : null;
+  const stamp = value => {
+    if (typeof value !== 'string' || !/^\d{4}-\d\d-\d\d[T ]\d\d:\d\d/.test(value)) return NaN;
+    const iso = value.trim().replace(' ', 'T');
+    return Date.parse(/(?:Z|[+-]\d\d:?\d\d)$/i.test(iso) ? iso : iso + '+09:00');
+  };
+  const kst = time => new Date(time + 9 * 60 * minute).toISOString();
+  const reading = value => value?.partial === true ? null : numeric(value?.total);
+  const format = (value, places) => isNumber(value) ?
+    new Intl.NumberFormat('ko-KR', {maximumFractionDigits: places, signDisplay: 'exceptZero'}).format(value) : '—';
+  const tone = value => value > 0 ? 'up' : value < 0 ? 'down' : '';
+  const cell = (value, places) => '<span class="num ' + tone(value) + '">' + format(value, places) + '</span>';
+  const sign = value => Math.abs(value) < 1e-8 ? 0 : Math.sign(value);
+
+  function sample(foreign, time, complete) {
+    if (!foreign || !Number.isFinite(time) || complete === false) return null;
+    const {call, put} = foreign;
+    const fut = numeric(foreign.fut), mini = numeric(foreign.mini);
+    const breakdown = groups.map(([, c, p]) => [numeric(call?.parts?.[c]), numeric(put?.parts?.[p])]);
+    const callTotal = reading(call), putTotal = reading(put);
+    const futEq = numeric(foreign.fut_eq) ?? add(fut, isNumber(mini) ? mini * 0.2 : null);
+    const optBias = call?.partial === true || put?.partial === true ? null :
+      numeric(foreign.opt_bias) ?? diff(callTotal, putTotal);
+    return {time, fut, mini, futEq, callTotal, putTotal, optBias, breakdown};
+  }
+
+  function compare(current, base) {
+    const {time, fut, mini, futEq, callTotal, putTotal, optBias, breakdown} = current;
+    if (!base) return {...current, from: null};
+    return {
+      time, from: base.time, fut: diff(fut, base.fut), mini: diff(mini, base.mini),
+      futEq: diff(futEq, base.futEq), optBias: diff(optBias, base.optBias),
+      callTotal: diff(callTotal, base.callTotal), putTotal: diff(putTotal, base.putTotal),
+      breakdown: breakdown.map(([c, p], i) => [diff(c, base.breakdown[i][0]), diff(p, base.breakdown[i][1])]),
+    };
+  }
+
+  function reference(points, target, latest) {
+    let best = null, offset = Infinity;
+    for (const point of points.values()) {
+      const gap = Math.abs(point.time - target);
+      if (point.time < latest && gap <= tolerance &&
+          (gap < offset || (gap === offset && point.time < best.time))) {
+        best = point;
+        offset = gap;
+      }
+    }
+    return best;
+  }
+
+  // 판정 기준: '오늘 파생 수급' 판정과 같은 기준(당일), 15분은 절반, 5분은 1/4(흐름 강화·약화 판단과 같은 비율).
+  const SCALE = [1, 0.25, 0.5];
+  function limitsFor(i, base) {
+    return base ? {fut: base.fut * SCALE[i], opt: base.opt * SCALE[i]} : null;
+  }
+  function verdict(row, enabled, lim) {
+    if (!enabled || !lim || !isNumber(row?.futEq) || !isNumber(row?.optBias)) return ['판정 보류', ''];
+    const f = Math.abs(row.futEq) >= lim.fut ? sign(row.futEq) : 0;
+    const o = Math.abs(row.optBias) >= lim.opt ? sign(row.optBias) : 0;
+    if (!f) return ['선물 변화 작음', 'muted'];
+    const side = f > 0 ? '매수' : '매도';
+    if (!o) return ['선물 ' + side + ' · 옵션 약함', ''];
+    if (f !== o) return ['방향 불일치', 'gold'];
+    return f > 0 ? ['상승 동조', 'up'] : ['하락 동조', 'down'];
+  }
+
+  function section() {
+    let root = document.getElementById('foreign-flow-alignment');
+    if (root) return root;
+    const anchor = document.getElementById('today-table');
+    if (!anchor) return null;
+    root = document.createElement('section');
+    root.id = 'foreign-flow-alignment';
+    root.style.margin = '18px 0';
+    anchor.before(root);
+    return root;
+  }
+
+  function show(rows, enabled, note, price, base) {
+    const root = section();
+    if (!root) return;
+    const header = '<h3>외국인 선물·옵션 동조 분석</h3><div class="note">' + note + '</div>';
+    if (!rows) {
+      root.innerHTML = header + '<div class="note"><b>판정 보류</b></div>';
+      return;
+    }
+    const columns = ['당일 누적', '최근 5분', '최근 15분'];
+    const top = rows.map((row, i) => {
+      const lim = limitsFor(i, base);
+      const [label, className] = verdict(row, enabled, lim);
+      const when = row && i !== 0 ? '<br><small class="muted">' + kst(row.from).slice(11,16) + ' → ' +
+        kst(row.time).slice(11,16) + ' · ' + ((row.time - row.from) / minute).toFixed(1) + '분</small>' : '';
+      const crit = lim ? '<br><small class="muted">기준 선물 ±' + format(lim.fut, 0).replace(/^\+/, '') + '계약 · 옵션 ±' +
+        format(lim.opt, 1).replace(/^\+/, '') + '억</small>' : '';
+      return '<th scope="col">' + columns[i] + '<br><b class="' + className + '">' + label + '</b>' + when + crit + '</th>';
+    }).join('');
+    const qtyAmt = (qty, multiplier, precision = 0) => cell(qty, precision) +
+      (isNumber(qty) && isNumber(price) ?
+        '<br><small class="muted">약 ' + format(qty * price * multiplier / 1e8, 2) + '억원</small>' : '');
+    const detail = (name, render) => '<tr><th scope="row">' + name + '</th>' +
+      rows.map(row => '<td class="r">' + (row ? render(row) : '—') + '</td>').join('') + '</tr>';
+    const head = '<thead><tr><th scope="col">구분</th>' + top + '</tr></thead>';
+    const futures = detail('일반선물', row => qtyAmt(row.fut, 250000)) +
+      detail('미니선물', row => qtyAmt(row.mini, 50000)) +
+      detail('선물 합계(일반 환산)', row => qtyAmt(row.futEq, 250000, 1));
+    const option = detail('옵션 콜−풋 합계', row => cell(row.optBias, 2)) +
+      detail('콜 순매수대금 합계', row => cell(row.callTotal, 2)) +
+      detail('풋 순매수대금 합계', row => cell(row.putTotal, 2));
+    const breakdown = groups.map(([name], i) => detail(name, row => {
+      const [call, put] = row.breakdown[i];
+      return '콜 ' + cell(call, 2) + ' · 풋 ' + cell(put, 2) + ' · 차이 ' + cell(diff(call, put), 2);
+    })).join('');
+    const estimated = isNumber(price) ? '현재 일반선물 가격 ' + format(price, 2).replace(/^\+/, '') +
+      'p를 일반·미니에 공통 적용한 명목금액 추정치입니다. ' : '유효한 선물 시세가 없으면 명목금액을 비웁니다. ';
+    root.innerHTML = header + '<div class="scroller"><table>' + head + '<tbody>' + futures + option +
+      breakdown + '</tbody></table></div><div class="note">선물 수량은 계약, 옵션은 프리미엄 순매수대금(억원)입니다. ' +
+      '콜과 풋 각각 +는 순매수, −는 순매도입니다. ' + estimated +
+      '선물 수급을 주 지표로 두고 옵션 콜−풋으로 방향을 확인합니다. 선물 변화가 기준보다 작으면 판정하지 않고, 옵션이 기준보다 작으면 \'옵션 약함\'으로 둡니다. ' +
+      '기준은 \'오늘 파생 수급\' 판정과 같고(당일), 15분은 그 절반, 5분은 1/4입니다. 거래 목적은 식별할 수 없습니다. ' +
+      '과거 조회에서 상품별 상세를 제공하지 않으면 이 화면에 수신 기록이 쌓이는 동안 해당 칸을 비웁니다.</div>';
+  }
+
+  function hold(reason) {
+    if (waitingReason === reason && document.getElementById('foreign-flow-alignment')) return;
+    waitingReason = reason;
+    show(null, false, reason);
+  }
+
+  function render(data) {
+    const v = data.deriv_today;
+    const time = stamp(v?.asof);
+    const generated = stamp(data.generated_at);
+    const foreign = v?.investors?.find(row => row.key === 'foreign');
+    const current = sample(foreign, time, v?.complete);
+    if (!current || !isNumber(current.futEq) || !isNumber(current.optBias)) {
+      hold('한투 파생 자료가 누락됐거나 시장별 수신 시각이 어긋났습니다.');
+      return;
+    }
+    const sessionDay = kst(time).slice(0, 10);
+    if (day !== sessionDay) {
+      recent.clear();
+      day = sessionDay;
+    }
+    const live = v.status === 'live' && data.mode !== 'archive' && data.mode !== 'demo' && Boolean(data.session);
+    if (live && (!Number.isFinite(generated) || generated - time > maxAge || time - generated > 30_000 ||
+      Math.abs(Date.now() - generated) > 45_000)) {
+      hold('한투 수급 자료 또는 대시보드 갱신이 지연됐습니다.');
+      return;
+    }
+    const rows = [compare(current, null), null, null];
+    if (live) {
+      const points = new Map();
+      const relevant = at => Number.isFinite(at) && at >= time - 17 * minute &&
+        at < time && kst(at).slice(0, 10) === day;
+      for (const p of v.series || []) {
+        const at = stamp(p.at);
+        if (!relevant(at)) continue;
+        const past = sample(p.foreign, at, p.complete);
+        if (past) points.set(at, past);
+      }
+      for (const [at, past] of recent) {
+        if (at < time - 17 * minute) recent.delete(at);
+        if (relevant(at)) points.set(at, past);
+      }
+      recent.set(time, current);
+      for (const [index, minutes] of [[1, 5], [2, 15]]) {
+        const base = reference(points, time - minutes * minute, time);
+        if (base) rows[index] = compare(current, base);
+      }
+    }
+    const quote = data.market_snapshots?.futures;
+    const price = numeric(quote?.values?.fut_price);
+    const quoteTime = stamp(quote?.received_at);
+    const usablePrice = isNumber(price) && price > 0 && Math.abs(quoteTime - time) <= maxAge;
+    waitingReason = '';
+    const fl = foreign.flat || {}, df = v.flat || {};
+    const fut = numeric(fl.fut_eq) ?? numeric(df.fut), opt = numeric(fl.opt_bias) ?? numeric(df.opt);
+    show(rows, live, (live ? '한투 장중 잠정 수급 · ' : '장중 실시간 판정 중지 · 마지막 조회 ') +
+      kst(time).slice(0,16).replace('T', ' ') + ' KST', usablePrice ? price : null,
+      isNumber(fut) && isNumber(opt) && fut > 0 && opt > 0 ? {fut, opt} : null);
+  }
+
+  return {render, hold};
+})();
+
+function render(D){if(!D.verdict)return;lastState=D;const q=k=>{const row=D.quality.find(x=>x.key===k)||{value:null,fresh:false,status:'미연결'};return D.mode==='archive'?{...row,fresh:true}:row},metric=(k,m)=>D.metrics[k]?.[m];
+const closed=D.mode!=='demo'&&!D.session;const genAge=(Date.now()-new Date(D.generated_at))/1000;$('mode').textContent=D.mode==='demo'?'가상 데모':D.mode==='archive'?'장외 · 마지막 관측':closed?'장외 · 연결 조회':'실시간 모니터';$('mode').className='chip '+(D.mode==='demo'?'demo':'');$('clock').textContent=tm(D.generated_at)+' KST';
+const missing=D.quality.filter(x=>['foreign_fut_qty','k200','nonarb_amt'].includes(x.key)&&!x.fresh).map(x=>x.label+' '+x.status);
+$('banner').textContent=closed&&D.mode!=='archive'?'장외 시간입니다. 아래 값은 오늘 장중 마지막 기록과 마감 뒤 조회값이며 실시간 신호가 아닙니다.':D.mode==='archive'?'최근 거래일의 저장된 관측입니다. 화면의 시각은 당시 한국시간이며 현재 매매 신호가 아닙니다.':D.mode==='demo'?'가상 데이터 재생 중입니다. 수급 전환·엇갈림·수신 지연을 보여주는 데모이며 실증 결과가 아닙니다.':genAge>35?'대시보드 수집 프로세스가 지연되고 있습니다. 마지막 데이터 시각을 확인하세요.':D.calendar_warning||missing.length?'확인 필요: '+(D.calendar_warning||missing.join(' / ')):'장중 수신 상태 정상. 실제 수급은 잠정치이며 모든 관측 기준은 검증 전입니다.';
+isClosed=closed;$('verdict').textContent=closed?'장외 · 장중 판정 쉬는 중':D.verdict.label;$('verdict').className=D.verdict.side===1?'tone-up':D.verdict.side===-1?'tone-down':'';$('guide').textContent=closed?'장외 시간이라 실시간 판정을 하지 않습니다(정상). 아래 숫자는 마지막 거래일의 장중 마지막 기록·마감 뒤 조회값이며, 각 칸에 기준 시각을 적었습니다. 수집 장애는 맨 아래 수신 상태에서 확인하세요.':D.verdict.guide;
+$('facts').innerHTML=D.verdict.facts.map(t=>'<li>'+esc(t)+'</li>').join('')||(closed?'<li>장외: 다음 장(선물 08:45 개장) 수신 뒤 판정합니다.</li>':'<li>판정에 필요한 관측을 기다립니다.</li>');$('turns').innerHTML=D.verdict.turns.map(t=>'<span class="pill">'+esc(t)+'</span>').join('');$('confirm').textContent=D.verdict.confirmations.join(' · ');renderFlowExplanation(D,closed);renderRebound(D);
+const cards=[['KOSPI200',q('k200').fresh?q('k200').value:null,2,'5분 '+signed(D.price5_pct,2)+'%'],['외국인 선물 · 최근 5분',metric('foreign_fut_qty','m5'),0,dayFlow(q('foreign_fut_qty'),closed)],['기관 선물 · 최근 5분',metric('inst_fut_qty','m5'),0,dayFlow(q('inst_fut_qty'),closed)],['비차익 · 최근 5분',metric('nonarb_amt','m5'),1,'억원 · 15분 '+signed(metric('nonarb_amt','m15'),1)],['시장−이론 베이시스',q('basis_residual').fresh?q('basis_residual').value:null,2,'p · 시장 '+signed(q('basis').value,2)],['상승 종목 비율',q('breadth').fresh?q('breadth').value:null,1,'% · KRX 코스피']];
+$('cards').innerHTML=cards.map(([title,v,d,extra],i)=>'<div class="card"><div class="title">'+esc(title)+'</div><strong class="num '+(i===0?'':color(v))+'">'+(i===0?fmt(v,d):signed(v,d))+'</strong><small>'+esc(extra)+'</small></div>').join('');
+const points=k=>D.history.map(h=>{const row=q(k);const age=(new Date(h.at)-new Date(D.generated_at))/1000;return{at:h.at,v:h.values[k]}});
+// snapshot historyには当時の有効値のみ表示。現在のstaleはカードと状態で明示。
+const recovered=k=>(D.recovery?.history||[]).map(h=>({at:h.at,v:h.values[k]}));
+chart('pricechart',[{points:points('foreign_fut_qty'),color:'#ff7974'},{points:points('k200'),color:'#e8c77b',decimals:2},{points:recovered('foreign_fut_qty'),color:'#ff7974',axis:0,recovered:true},{points:recovered('k200'),color:'#e8c77b',axis:1,decimals:2,recovered:true}],true);
+chart('programchart',[{points:points('nonarb_amt'),color:'#ff7974'},{points:points('program_amt'),color:'#e8c77b'},{points:recovered('nonarb_amt'),color:'#ff7974',recovered:true},{points:recovered('program_amt'),color:'#e8c77b',recovered:true}]);
+chart('oichart',[{points:points('fut_oi'),color:'#73d9b6'},{points:points('fut_price'),color:'#e8c77b',decimals:2},{points:recovered('fut_oi'),color:'#73d9b6',axis:0,recovered:true},{points:recovered('fut_price'),color:'#e8c77b',axis:1,decimals:2,recovered:true}],true);renderPriceOI(D.price_oi);renderRecovery(D);
+// 장 마감 뒤에는 마감 요약(LS t1602 마감 후·미니 포함)과 LS t1601 통합 조회로 바꾼다. 없으면 장중 마지막 값(잠정)을 그대로 보여 준다.
+const FC=closed?D.flows_close:null;
+const flowRows=closed?D.flows.map(r=>{const c=FC?.rows?.[r.investor]||{},hasF=c.fut!=null,hasS=c.spot!=null;return{...r,close:c,
+ fut:hasF?{...r.fut,value:c.fut,fresh:true,source:'마감 요약'}:{...r.fut,fresh:r.fut.value!==null},
+ fut_amt:hasF&&c.fut_amt!=null?{...(r.fut_amt||{}),value:c.fut_amt,fresh:true}:r.fut_amt&&{...r.fut_amt,fresh:r.fut_amt.value!==null},
+ spot:hasS?{...r.spot,value:c.spot,fresh:true}:{...r.spot,fresh:r.spot.value!==null},
+ fut5:hasF?null:r.fut5,fut15:hasF?null:r.fut15,fut_manual_change:hasF?null:r.fut_manual_change,spot5:hasS?null:r.spot5,spot15:hasS?null:r.spot15}}):D.flows;
+$('flows-basis').innerHTML=!closed?'':FC&&(FC.fut||FC.spot)?'<b>장 마감 후 값</b> · 선물 '+(FC.fut?esc(FC.fut.source)+' ('+esc(FC.fut.status)+' · 마지막 변화 '+esc(FC.fut.last_change)+')'+(FC.fut.mini?' · 아래 작은 글씨는 미니 0.2배 환산 포함':''):'장중 마지막(잠정)')+' · 현물 '+(FC.spot?esc(FC.spot.source)+' '+tm(FC.spot.at):'장중 마지막(잠정)')+'. 5·15분 변화는 장중에만 표시합니다.':'<span style="color:var(--gold)">장 마감 후 값이 아직 없어 장중 마지막 값(잠정)을 보여 줍니다.</span>';
+$('flows').innerHTML=flowRows.map(r=>'<tr><td>'+esc(r.investor)+'</td><td class="r num '+color(r.fut.fresh?r.fut.value:null)+'">'+signed(r.fut.fresh?r.fut.value:null)+(r.fut_amt&&r.fut_amt.fresh?'<br><small class="muted">'+signed(r.fut_amt.value)+'억</small>':'')+(r.close&&r.close.fut_eq!=null?'<br><small class="muted">미니 포함 '+signed(r.close.fut_eq)+'</small>':'')+(r.fut.value!==null&&!r.fut.fresh?'<small class="muted">수신 지연</small>':'')+(r.fut.fresh&&/0780|CSV/.test(r.fut.source||'')?'<small class="muted"> 수동 '+tm(r.fut.at)+'</small>':'')+'</td><td class="r num">'+(r.fut_manual_change?'<small class="muted">직전 입력 대비</small> '+signed(r.fut_manual_change.value)+'<small class="muted"> / '+r.fut_manual_change.minutes+'분</small>':signed(r.fut5)+' / '+signed(r.fut15))+'</td><td class="r num '+color(r.spot.fresh?r.spot.value:null)+'">'+signed(r.spot.fresh?r.spot.value:null)+'</td><td class="r num">'+signed(r.spot5)+' / '+signed(r.spot15)+'</td></tr>').join('');
+$('programstats').innerHTML=[['차익 당일',q('arb_amt').fresh?q('arb_amt').value:null],['비차익 당일',q('nonarb_amt').fresh?q('nonarb_amt').value:null]].map(([k,v])=>'<div class="metric">'+k+'<b class="num '+color(v)+'">'+signed(v,1)+' <small>억원</small></b></div>').join('');
+$('stocks').innerHTML=D.stocks.length?D.stocks.map(r=>'<tr><td>'+esc(r.name)+'<div class="note">'+esc(r.code)+' · '+(r.basis?esc(r.basis):'')+' · 조회 '+tm(r.asof)+(r.fresh===false?' · 수신 지연':'')+'</div></td><td class="r num '+color(r.change_pct)+'">'+signed(r.change_pct,2)+'%</td><td class="r num '+color(r.foreign_amt)+'">'+signed(r.foreign_amt,1)+(r.foreign_change!=null&&!r.closing?'<br><small class="muted">직전 가집계 대비 '+signed(r.foreign_change,0)+'</small>':'')+'</td><td class="r num '+color(r.inst_amt)+'">'+signed(r.inst_amt,1)+'</td></tr>').join(''):'<tr><td colspan="4" class="muted">기존 REST 연결 후 관심종목을 표시합니다.</td></tr>';
+renderInvestorOptions(D.investor_options);renderInsight(D.option_analytics);renderClose(D.close_summary);renderBoard(D.investor_board);renderStockFutures(D.stock_futures);renderToday(D.deriv_today,D.recovery);try{DerivFlowAlignment.render(D)}catch(error){DerivFlowAlignment.hold('동조 분석 자료를 읽지 못했습니다.');console.warn(error)};
+const snapshots=D.market_snapshots||{},F=snapshots.futures,C=snapshots.calls,P=snapshots.puts;
+$('snapshotbody').innerHTML=F||C||P?[
+ F?'<div>선물 '+esc(F.code)+' · 마지막 가격 <b>'+fmt(F.values.fut_price,2)+'</b> · 미결제 '+fmt(F.values.fut_oi)+'계약 · 시장 베이시스 '+fmt(F.values.basis,2)+'p · 조회 '+tm(F.received_at)+'</div>':'<div>선물 초기 조회 응답 대기</div>',
+ ...[C,P].filter(Boolean).map(s=>'<div>'+esc(s.month)+' '+(s.kind==='calls'?'콜':'풋')+' '+s.rows.length+'종목 · 조회 범위 미결제 합계 '+fmt(s.rows.reduce((a,r)=>a+(Number(r.oi)||0),0))+'계약 · 조회 '+tm(s.received_at)+'</div>')
+].join(''):'초기 조회 응답 대기. 로그인 성공만으로 파생 데이터가 연결되는 것은 아닙니다.';
+let O=D.options;
+if((closed||!O.fresh_oi)&&C&&P){const allRows=[...C.rows,...P.rows],reference=F?.values?.k200;let strikes=[...new Set(allRows.map(r=>r.strike))].sort((a,b)=>a-b);if(reference&&strikes.length){const center=strikes.reduce((a,b)=>Math.abs(b-reference)<Math.abs(a-reference)?b:a),i=strikes.indexOf(center);strikes=strikes.slice(Math.max(0,i-8),i+9)}const rows=allRows.filter(r=>strikes.includes(r.strike));O={...O,month:C.month,rows,registered:rows.length,fresh_oi:0,atm:reference?strikes.reduce((a,b)=>Math.abs(b-reference)<Math.abs(a-reference)?b:a):null,atm_iv:null,snapshot:true,note:(closed?'장외 ':'')+'마지막 조회('+tm(C.received_at)+' · '+(C.source||'')+')의 ATM 주변 행사가입니다. 실시간 체결 수신이 아닙니다.'}}
+$('optmonth').textContent=O.month?O.month.slice(0,4)+'.'+O.month.slice(4)+' 월물':'옵션 대기';$('optinfo').textContent=O.snapshot?'보관 조회본 '+O.registered+'종목 표시(ATM '+fmt(O.atm,1)+') · 실시간 체결 미결제는 '+(closed?'장외라 받지 않음':'아직 미수신')+' · '+O.note:'ATM '+fmt(O.atm,1)+' · IV '+fmt(O.atm_iv,1)+'% · 실시간 미결제 '+O.fresh_oi+'/'+O.registered+'종목 · 빈 막대는 미수신 · '+O.note;optionsChart(O);
+const prior=$('positiongroup').value;$('positiongroup').innerHTML=D.positions.groups.map((g,i)=>'<option value="'+i+'">'+esc(g.investor)+' · '+esc(g.expiry)+' 만기</option>').join('')||'<option>추정 포지션 미연결</option>';if(prior)$('positiongroup').value=prior;drawPosition(D);$('positionnote').textContent=D.positions.note;
+const E=D.events;$('eventsbody').innerHTML=E.slice(0,25).map(e=>{const ret=m=>{const r=e.outcomes[String(m)];return r?.status==='관측'?'<span class="'+color(r.return_pct)+'">'+signed(r.return_pct,2)+'%</span>':r?esc(r.status):'대기'};return'<tr><td class="num">'+e.at.slice(5,10)+' '+tm(e.at)+'</td><td><details><summary class="'+(e.side===1?'up':'down')+'">'+esc(e.kind)+'</summary><small>'+e.facts.map(esc).join('<br>')+'</small></details></td><td class="r num">'+fmt(e.price,2)+'</td>'+[5,15,30,60].map(m=>'<td class="r num">'+ret(m)+'</td>').join('')+'</tr>'}).join('')||'<tr><td colspan="7" class="muted">기준을 충족하고 지속된 흐름이 기록됩니다.</td></tr>';
+const observed=E.filter(e=>e.outcomes['15']?.status==='관측');const mean=observed.length?observed.reduce((s,e)=>s+e.side*e.outcomes['15'].return_pct,0)/observed.length:null;$('eventstats').innerHTML='<span class="pill">최근 관측 '+E.length+'건</span><span class="pill">15분 평가 '+observed.length+'건</span><span class="pill">방향 반영 평균 '+signed(mean,2)+'%</span><span class="pill">'+(D.mode==='demo'?'가상 결과':'거래비용 미반영 · 검증 전')+'</span>';
+if(E.length&&E[0].id!==lastEvent){if(lastEvent&&D.mode!=='archive'&&D.mode!=='preview'){notice(E[0].kind+' · '+tm(E[0].at));if(sound)beep()}lastEvent=E[0].id}
+$('connections').innerHTML=Object.entries(D.connections).map(([k,v])=>esc(k)+' · '+esc(v.status)+' <span class="muted">'+esc(v.detail)+'</span><br>').join('')||'가상 데모의 연결 상태는 생략합니다.';
+$('quality').innerHTML=D.quality.filter(q=>['foreign_fut_qty','inst_fut_qty','foreign_spot_amt','nonarb_amt','basis','basis_theory','k200','fut_oi'].includes(q.key)).map(q=>{const off=closed&&!q.fresh&&q.value!==null&&q.at;return '<div class="quality-row"><b>'+esc(q.label)+'</b><br><span class="dot '+(q.fresh?'good':off?'':'bad')+'"></span>'+(off?'장외 · 마지막 수신 '+esc(String(q.at).slice(5,10).replace('-','/'))+' '+tm(q.at)+' (장중 갱신 대상)':esc(q.status)+' · '+(q.age_sec===null?'—':fmt(q.age_sec)+'초 전'))+'<br><span class="muted">'+esc(q.source||'데이터 연결 필요')+'</span></div>'}).join('');
+$('cumulative').innerHTML='<b>'+esc(D.cumulative.label)+'</b><div class="num" style="font-size:24px;margin:10px 0">'+signed(D.cumulative.sum)+'계약</div><div class="note">기준 만기 '+esc(D.cumulative.since)+' · 기록 '+D.cumulative.observed_days+'일 · 누락 '+D.cumulative.missing.length+'일<br>'+esc(D.cumulative.note)+'</div>';$('thresholds').textContent=JSON.stringify(D.rules,null,2);renderReview(D);
+}
+let readingWindow='day';
+function setReadingWindow(w){readingWindow=w;lastState&&renderPriceOI(lastState.price_oi)}
+function renderReading(id,R){if(!R){$(id).innerHTML='';return}const li=xs=>xs.map(t=>'<li>'+esc(t)+'</li>').join('');
+$(id).innerHTML='<div><h4>사실</h4><ul>'+li(R.facts)+'</ul></div><div class="inf"><h4>추론</h4><ul>'+li(R.inferences)+'</ul></div><div class="lim"><h4>한계</h4><ul>'+li(R.limits)+'</ul></div>'}
+function renderPriceOI(P){
+const W=(P&&P.windows)||[],picked=W.find(w=>w.key===readingWindow)||W[W.length-1];
+$('reading-tabs').innerHTML=W.filter(w=>w.reading).map(w=>'<button type="button" class="'+(w===picked?'active':'')+'" onclick="setReadingWindow(\''+w.key+'\')">'+(w.key==='day'?'당일':esc(w.title.replace('최근 ','')))+'</button>').join('');
+renderReading('oi-reading',picked&&picked.reading);
+if(!P){$('oi-quads').innerHTML='';$('oi-note').textContent='수집기를 새 버전으로 다시 시작하면 가격·미결제 판정이 표시됩니다.';return}
+$('oi-chip').textContent='미결제 '+fmt(P.oi)+'계약 · 선물 '+fmt(P.price,2);
+$('oi-quads').innerHTML=P.windows.map(w=>'<div class="oi-quad'+(w.side?' on':'')+'">'+esc(w.title)+'<b class="'+(w.side>0?'up':w.side<0?'down':'')+'">'+esc(w.label)+'</b>가격 <span class="num '+color(w.price_pct)+'">'+signed(w.price_pct,2)+'%</span> · 미결제 <span class="num '+color(w.oi_change)+'">'+signed(w.oi_change)+'</span>계약<br>'+(w.side?esc(w.text.split(' · ')[1]||''):esc(w.text))+'<br>외국인 선물 '+(w.key==='day'?'당일 ':'같은 구간 ')+'<span class="num '+color(w.foreign_fut)+'">'+signed(w.foreign_fut)+'</span>계약</div>').join('');
+$('oi-note').innerHTML=(isClosed?'<span style="color:var(--gold)">장외: 현재 구간 판정은 멈춘 상태입니다(\'자료 부족\'은 장애가 아님). 차트는 보관된 장중 기록입니다.</span><br>':'')+(P.rollover?'<span style="color:var(--gold)">'+esc(P.rollover)+'</span><br>':'')+esc(P.note)+(P.prev_close?' 전일 대비 가격은 전일 종가 '+fmt(P.prev_close,2)+' 기준입니다.':' 전일 종가가 없어 전일 대비 가격은 비워 둡니다.')}
+let investorScope='daily_net_trades';
+function setInvestorScope(s){investorScope=s;refresh()}
+function lsTotalsTable(L){const inv=['foreign','inst','individual','financial'],names={foreign:'외국인',inst:'기관계',individual:'개인',financial:'금융투자'},n=v=>v==null?'—':signed(v,0);
+return '<table><thead><tr><th>LS 구분</th>'+inv.map(k=>'<th class="r">'+names[k]+'<br><small class="muted">계약 (억)</small></th>').join('')+'<th>시각</th></tr></thead><tbody>'+L.rows.map(r=>'<tr><td>'+esc(r.label)+'</td>'+inv.map(k=>'<td class="r num">'+n((r.qty||{})[k])+'<br><small class="muted">'+n((r.amt||{})[k])+'억</small></td>').join('')+'<td class="num">'+esc((r.time||'').replace(/(\d\d)(\d\d)(\d\d)/,'$1:$2:$3'))+'</td></tr>').join('')+'</tbody></table>'}
+
+function tdAmt(v){return known(v)?signed(v,0)+'억':'—'}
+function tdParts(side){const p=side.parts||{},n={call:'월',wk_mon_call:'W월',wk_thu_call:'W목',mini_call:'미니',put:'월',wk_mon_put:'W월',wk_thu_put:'W목',mini_put:'미니'};return Object.entries(p).map(([k,v])=>n[k]+' '+(known(v)?signed(v,0):'—')).join(' · ')}
+function renderBoard(B){
+if(!B||B.status!=='received'){$('board-chip').textContent='대기';empty('board-table',(B&&B.note)||'LS 투자자 종합 조회를 기다립니다.');$('board-note').textContent='';return}
+$('board-chip').textContent=tm(B.generated_at)+' 조회 · '+({live:'장중 30초마다',stale:'조회 지연 '+Math.round(B.age_sec/60)+'분',archive:'마지막 저장본'}[B.mode]||'');
+const detail=$('board-detail').checked,inv=B.markets[0].rows.map(r=>r.label),hl={'개인':1,'외국인':1,'기관계':1};
+const cell=(v,net)=>'<td class="r num'+(net?' '+color(v):'')+'">'+(v==null?'—':net?signed(v):fmt(v))+'</td>';
+$('board-table').innerHTML='<table class="board"><thead><tr><th>구분</th><th></th>'+inv.map(n=>'<th class="r'+(hl[n]?' hl':'')+'">'+esc(n)+'</th>').join('')+'</tr></thead><tbody>'+B.markets.map(m=>{
+ const lines=(detail?[['매도','sell',0],['매수','buy',0]]:[]).concat([['순매수','net',1]]);
+ return lines.map(([name,k,net],i)=>'<tr class="'+(net?'net':'sub')+'">'+(i===0?'<td class="mk" rowspan="'+lines.length+'">'+esc(m.label)+'</td>':'')+'<td class="muted small">'+name+'</td>'+m.rows.map(r=>cell(r[k],net)).join('')+'</tr>').join('')}).join('')+'</tbody></table>';
+$('board-note').textContent='단위 '+B.unit+' · '+B.source+' · '+B.exchange+' · '+B.note}
+function renderToday(V,R){
+const oi=V&&V.oi;$('today-recovery-legend').hidden=true;$('today-recovery-note').textContent='';
+if(!V||!V.investors){$('today-chip').textContent=V&&V.status==='unavailable'?'미연결':'대기';empty('today-lines',(V&&V.note)||'한투 수집기가 장중 1분마다 투자자별 선물·옵션 순매수를 받으면 표시됩니다.');renderTodayVol(V&&V.vol);$('today-table').innerHTML='';$('today-chart').innerHTML='';$('today-note').textContent='';renderTodayOI(oi);return}
+$('today-chip').textContent=V.status==='live'?'한투 1분 주기 · '+tm(V.asof):'마지막 기록 '+String(V.day).slice(5).replace('-','/')+' '+tm(V.asof);
+$('today-caution').textContent=V.caution||'';
+$('today-est').innerHTML=(V.estimates&&V.estimates.length)?'<b>외국인 옵션 매매와 미결제 증감</b> <span class="muted">(관측만 · 시장 전체 미결제라 외국인의 신규/청산은 구분 불가)</span><br>'+V.estimates.map(e=>'<span>'+esc(e.text)+'</span>').join('<br>'):'<span class="muted">외국인 옵션 매매와 미결제 증감: 미결제 비교 기준(전 거래일 전광판·위클리 전광판)이 쌓이면 표시됩니다.</span>';
+if(V.complete===false)$('today-caution').textContent='이번 조회는 일부 시장이 빠졌거나 시각이 어긋나 합계·판정을 보류했습니다. '+(V.caution||'');
+renderTodayCum(V.cumulative,V.investors);renderTodayVol(V.vol);renderTodayWeekly(V.weekly);
+const tone=s=>s===1?'tone-up':s===-1?'tone-down':'';
+const ch=(c,f,u)=>known(c&&c[f])?signed(c[f],0)+u:'—';
+$('today-lines').innerHTML=V.investors.filter(x=>x.key!=='financial').map(x=>'<div class="td-line"><div class="td-who">'+esc(x.label)+'</div><div><div class="td-head '+''+'">'+esc(x.reading.headline)+'</div>'+(x.momentum?'<small class="'+(x.momentum.state===2?'gold':x.momentum.state<0?'gold':'muted')+'">흐름: '+esc(x.momentum.text)+'</small>':'')+'<small>'+esc(x.reading.fut_text)+'</small><small>'+esc(x.reading.opt_text)+'</small>'+(x.rank&&known(x.rank.pct)?'<small class="muted">일반선물 '+signed(x.fut)+'계약 = 최근 '+x.rank.n+'거래일 마감값 중 아래에서 '+fmt(x.rank.pct,0)+'% 위치'+(V.status==='live'?' (장중이라 아직 작게 나올 수 있음)':'')+'</small>':'')+(x.basis?'<small class="muted">판단 기준: 선물 '+esc(x.basis.fut_eq)+' / 옵션 '+esc(x.basis.opt_bias)+'</small>':'')+([x.change.m15.fut_eq,x.change.m15.opt_bias,x.change.m60.fut_eq,x.change.m60.opt_bias].some(known)?'<small class="muted">최근 15분 변화 선물 '+ch(x.change.m15,'fut_eq','계약')+' · 옵션 '+ch(x.change.m15,'opt_bias','억')+' / 60분 선물 '+ch(x.change.m60,'fut_eq','계약')+' · 옵션 '+ch(x.change.m60,'opt_bias','억')+'</small>':'')+'</div></div>').join('');
+const row=x=>'<tr><td>'+esc(x.label)+'</td><td class="r num '+color(x.fut)+'">'+signed(x.fut)+'</td><td class="r num '+color(x.mini)+'">'+signed(x.mini)+'</td><td class="r num '+color(x.fut_eq)+'"><b>'+signed(x.fut_eq)+'</b></td><td class="r num td-cell '+'muted'+'">'+(x.call.partial?'<span class="muted">부분 '+tdAmt(x.call.partial_sum)+'</span>':tdAmt(x.call.total))+'<small>'+esc(tdParts(x.call))+'</small></td><td class="r num td-cell '+'muted'+'">'+(x.put.partial?'<span class="muted">부분 '+tdAmt(x.put.partial_sum)+'</span>':tdAmt(x.put.total))+'<small>'+esc(tdParts(x.put))+'</small></td><td class="r num '+'muted'+'"><b>'+tdAmt(x.opt_bias)+'</b></td></tr>';
+$('today-table').innerHTML='<table><thead><tr><th>투자자</th><th class="r">선물</th><th class="r">미니선물</th><th class="r">선물 합계(미니×0.2)</th><th class="r">콜 합산 순매수(억)</th><th class="r">풋 합산 순매수(억)</th><th class="r">콜−풋 대금</th></tr></thead><tbody>'+V.investors.map(row).join('')+'</tbody></table>';
+const pts=V.series||[],reference=RecoveryCharts.todayReference(V,R);chart('today-chart',[{color:'var(--gold)',points:pts.map(p=>({v:p.foreign.fut_eq,label:p.t,at:p.at})),decimals:0,label:'한투 선물 미니 환산 합계'},{color:'var(--green)',points:pts.map(p=>({v:p.foreign.opt_bias,label:p.t,at:p.at})),decimals:0,label:'한투 옵션 콜−풋 대금'},{color:'#c2a0ff',points:reference.points,axis:0,recovered:true,decimals:0,label:'LS 일반선물 사후 복구 · 미니 제외'},{color:'var(--gold)',points:reference.kis.fut,axis:0,recovered:true,decimals:0,label:'LS t1617 사후 복구 · 선물 미니 환산 합계(같은 기준)'},{color:'var(--green)',points:reference.kis.opt,axis:1,recovered:true,decimals:0,label:'LS t1617 사후 복구 · 옵션 콜−풋(월물+미니, 위클리 제외)'}],true);
+const span=rs=>rs.map(r=>r[0]===r[1]?r[0]:r.join('~')).join(' / ');
+$('today-recovery-legend').hidden=!(reference.minutes||reference.kis.minutes);$('today-recovery-note').textContent=[
+ reference.kis.minutes?'노란·초록 점선 '+reference.kis.minutes+'분('+span(reference.kis.ranges)+')은 수집기가 꺼져 있던 구간을 LS t1617(30초 시간대별)로 사후 복구한 값입니다. 선물은 노란 선과 같은 기준(일반+미니×0.2)이고, 옵션은 위클리(월·목)가 빠진 월물+미니 콜−풋(억 단위 정수)이라 초록 선과 값이 다를 수 있습니다.':'',
+ reference.minutes?'보라 점선 '+reference.minutes+'분('+span(reference.ranges)+')은 LS 일반선물만의 참고값입니다(미니 제외). 이 구간의 미니 포함 합계·옵션은 아직 복구되지 않았습니다(LS t1617 조회 대기).':'',
+ reference.minutes||reference.kis.minutes?'사후 조회 값은 실시간 판정·관측 기록에 쓰지 않습니다.':''].filter(Boolean).join(' ');
+$('today-note').textContent=(V.errors&&V.errors.length?'일부 시장 조회 실패: '+V.errors.join(' / ')+' · ':'')+V.source+(V.status==='live'?'':' · 장중 실시간 값이 아닙니다');
+renderTodayOI(oi)}
+
+function renderTodayCum(C,I){if(!C||!C.investors){empty('today-cum','LS 일별 확정 이력을 받으면 표시됩니다(실시간실행이 켜질 때 자동).');return}
+const rows=Object.values(C.investors).map(x=>'<tr><td>'+esc(x.label)+'</td><td class="r num '+color(x.since_expiry)+'">'+signed(x.since_expiry)+'</td><td class="r num '+color(x.last20)+'">'+signed(x.last20)+'</td><td class="r">'+(known(x.last20_pct)?fmt(x.last20_pct,0)+'%':'—')+(known(x.last20_pct)&&(x.last20_pct>=90||x.last20_pct<=10)?' <b class="gold">극단</b>':'')+'</td></tr>').join('');
+$('today-cum').innerHTML='<table><thead><tr><th>투자자</th><th class="r">만기('+esc(String(C.since).slice(5).replace('-','/'))+') 이후</th><th class="r">최근 20일</th><th class="r">20일 누적 위치</th></tr></thead><tbody>'+rows+'</tbody></table><div class="muted" style="margin-top:6px">'+esc(C.note)+' 보관 '+C.days+'거래일('+esc(C.first_day||'')+'~)'+(C.missing&&C.missing.length?' · 빠진 날 '+C.missing.join(', '):'')+' · 마지막 반영일 '+esc(String((Object.values(C.investors)[0]||{}).last_day||'—'))+' · 오늘 장중 값은 포함하지 않음</div>'}
+function renderTodayVol(O){if(!O){empty('today-vol','LS 옵션 전광판 조회(장중 5분)가 쌓이면 ATM IV·스큐·풋콜비율을 표시합니다.');return}
+const c=O.cur||{};$('today-vol').innerHTML='<div style="font-weight:650;margin-bottom:6px">'+esc(O.headline)+'</div><div class="muted">'+esc(O.day)+' '+tm(O.asof)+' · 콜 미결제 '+fmt(c.call_oi)+' · 풋 미결제 '+fmt(c.put_oi)+(O.prev_day?' · 비교 '+esc(O.prev_day):'')+'</div><div class="muted" style="margin-top:4px">'+esc(O.note)+'</div>'}
+function renderTodayWeekly(W){if(!W||!W.boards||!W.boards.length){$('today-weekly').innerHTML='<span class="muted">위클리 옵션 미결제: 장중(5분 주기) 한투 전광판 조회 뒤 표시됩니다.</span>';return}
+const li=xs=>xs.length?xs.map(r=>fmt(r.strike,1)+' '+signed(r.oi_chg)).join(', '):'없음';
+$('today-weekly').innerHTML='<b>위클리 옵션 미결제(전일 대비)</b> <span class="muted">'+tm(W.asof)+'</span><br>'+W.boards.map(b=>esc(b.label)+' '+esc(b.code)+': 콜 '+signed(b.call_oi_chg)+'(늘어난 곳 '+li(b.call_up)+') · 풋 '+signed(b.put_oi_chg)+'(늘어난 곳 '+li(b.put_up)+')').join('<br>')+'<br><span class="muted">늘어난 곳: 콜은 지수 위, 풋은 지수 아래 행사가</span>'}
+function renderTodayOI(O){
+if(!O||O.status!=='ok'){empty('today-oi',(O&&O.note)||'LS 옵션 조회가 쌓이면 표시됩니다.');return}
+const li=(xs,cls)=>xs.length?xs.map(r=>'<span class="num '+cls+'">'+fmt(r.strike,1)+' '+signed(r.chg)+'</span> <span class="muted">(미결제 '+fmt(r.oi)+')</span>').join('<br>'):'<span class="muted">없음</span>';
+$('today-oi').innerHTML='<div style="font-weight:650;margin-bottom:6px">'+esc(O.headline)+'</div><div class="muted">'+esc(O.month)+'월물 · '+esc(O.base)+' · 지수 '+fmt(O.spot,2)+' ±'+fmt(O.band_pct,0)+'% · 조회 '+tm(O.asof)+'</div><table style="margin-top:8px"><thead><tr><th>콜 미결제 증가(지수 위)</th><th>풋 미결제 증가(지수 아래)</th></tr></thead><tbody><tr><td>'+li(O.call_up,'up')+'</td><td>'+li(O.put_up,'down')+'</td></tr></tbody></table><details style="margin-top:6px"><summary>줄어든 행사가</summary><table><tbody><tr><td>콜 '+li(O.call_down,'muted')+'</td><td>풋 '+li(O.put_down,'muted')+'</td></tr></tbody></table></details>'+(O.note?'<div class="muted" style="margin-top:6px">'+esc(O.note)+'</div>':'')}
+function renderInvestorOptions(V){
+if(V&&V.status==='ls'){$('investor-tabs').innerHTML='';$('investor-summary').innerHTML='<div class="note" style="color:var(--gold)">'+esc(V.headline)+'</div><div class="note">조회 '+tm(V.generated_at)+' · '+esc(V.data_day||'')+' 거래일 · '+esc(V.source)+'</div>'+lsTotalsTable(V);$('investor-detail').innerHTML='<div class="note">'+esc(V.note)+' 키움 OCX를 끈 뒤로 행사가별 투자자 수량은 없습니다.</div>';return}
+if(!V||V.status!=='received'){$('investor-tabs').innerHTML='';empty('investor-summary',V?.note||'수집기가 옵션 투자자 수량을 5분마다 조회하면 표시됩니다.');$('investor-detail').innerHTML='';return}
+const scopes=V.scopes||['daily_net_trades'];if(!scopes.includes(investorScope))investorScope=scopes[0];
+const names={daily_net_trades:'당일 순매매',cumulative:'누적'};
+$('investor-tabs').innerHTML=scopes.map(s=>'<button type="button" class="'+(s===investorScope?'active':'')+'" onclick="setInvestorScope(\''+s+'\')">'+names[s]+'</button>').join('');
+const G=V.groups.filter(g=>(g.scope||'daily_net_trades')===investorScope),cum=investorScope==='cumulative';
+$('investor-summary').innerHTML='<div class="note">조회 '+tm(V.generated_at)+' · 실시간 아님 · '+esc((V.notes||{})[investorScope]||'')+' '+esc(V.note||'')+'</div><table><thead><tr><th>투자자</th><th>확인 월물</th><th>조회된 옵션</th><th class="r">콜 합계</th><th class="r">풋 합계</th><th>선물</th></tr></thead><tbody>'+G.map(g=>'<tr><td>'+esc(g.label)+'</td><td>'+g.months.map(esc).join(', ')+'</td><td>'+(g.matched_options?g.matched_options+'종목':'<small class="muted">'+esc(g.message||'응답 없음')+'</small>')+(g.unmatched_options?' · 불일치 '+g.unmatched_options:'')+'</td><td class="r num '+color(g.call_net_qty)+'">'+signed(g.call_net_qty)+'</td><td class="r num '+color(g.put_net_qty)+'">'+signed(g.put_net_qty)+'</td><td><small class="muted">0780 입력</small></td></tr>').join('')+'</tbody></table>';
+$('investor-detail').innerHTML='<table><thead><tr><th>투자자</th><th>월물</th><th>콜/풋</th><th class="r">행사가</th><th class="r">'+(cum?'누적 순매수':'당일 순매매')+' 계약</th>'+(cum?'<th class="r">매입단가</th><th class="r">평가손익</th>':'')+'</tr></thead><tbody>'+G.flatMap(g=>g.rows.filter(r=>r.net_qty).map(r=>'<tr><td>'+esc(g.label)+'</td><td>'+esc(r.month)+'</td><td>'+(r.cp==='C'?'콜':'풋')+'</td><td class="r num">'+fmt(r.strike,1)+'</td><td class="r num '+color(r.net_qty)+'">'+signed(r.net_qty)+'</td>'+(cum?'<td class="r num">'+fmt(r.avg_price,2)+'</td><td class="r num">'+signed(r.pnl)+'</td>':'')+'</tr>')).join('')+'</tbody></table><div class="note">수량이 0인 행사가는 생략했습니다.</div>';
+}
+function renderStockFutures(F){
+if(!F||F.status!=='received'){$('sf-chip').textContent='대기';$('sfutures').innerHTML='<tr><td colspan="5" class="muted">'+esc(F?.note||'주식선물 조회 대기')+'</td></tr>';return}
+$('sf-chip').textContent=(F.mode==='live'?'장중 3분마다':F.mode==='stale'?'조회 지연 '+Math.floor(F.age_sec/60)+'분':'마지막 저장본')+' · '+tm(F.generated_at);
+const k=v=>v==null?'—':Math.abs(v)>=1e4?signed(v/1e4,1)+'만':signed(v);
+$('sfutures').innerHTML=(F.rows||[]).map(r=>'<tr><td>'+esc(r.name)+'<div class="note">'+esc(r.month.slice(0,4)+'/'+r.month.slice(4))+'물 · 만기 '+esc((r.expiry||'').slice(4,6)+'/'+(r.expiry||'').slice(6))+(r.days_left!=null?' · 잔여 '+r.days_left+'일':'')+(r.value_eok!=null?' · 거래대금 '+fmt(r.value_eok)+'억':'')+'</div></td>'
++'<td class="r num">'+fmt(r.price)+' <small class="'+color(r.change_pct)+'">'+signed(r.change_pct,2)+'%</small><br><small class="muted">'+fmt(r.base_price)+' '+signed(r.base_change_pct,2)+'%</small></td>'
++'<td class="r num '+color(r.basis_gap)+'">'+signed(r.basis_gap)+(r.basis_gap_pct!=null?' <small>('+signed(r.basis_gap_pct,2)+'%)</small>':'')+'<br><small class="muted">시장 '+signed(r.basis_market)+' · 이론 '+signed(r.basis_theory)+'</small></td>'
++'<td class="r num">'+fmt(r.oi)+'<br><small class="'+color(r.oi_change)+'">'+signed(r.oi_change)+'</small></td>'
++'<td class="r num '+color(r.foreign_member_net)+'">'+k(r.foreign_member_net)+'<small class="muted">주</small></td></tr>').join('')+((F.errors||[]).length?'<tr><td colspan="5" class="muted">'+esc(F.errors.join(' · '))+'</td></tr>':'')}
+function renderClose(C){
+if(!C||C.status!=='received'){$('close-chip').textContent='대기';$('close-head').textContent=C?.note||'마감 요약이 아직 없습니다.';$('close-notes').innerHTML='';$('close-reading').innerHTML='';$('close-swing').innerHTML='';$('close-swing-title').style.display='none';$('close-options').innerHTML='';$('close-table').innerHTML='';return}
+const L=C.latest,ok=L.status==='확정 추정';$('close-chip').textContent=L.status+' · 마지막 변화 '+L.last_change.slice(0,5);
+$('close-head').innerHTML='<b>'+esc(L.text)+'</b>';
+$('close-notes').innerHTML=L.notes.map(t=>'<div class="note" style="color:var(--gold)">'+esc(t)+'</div>').join('');
+renderReading('close-reading',L.reading);renderReading('close-swing',L.swing_reading);$('close-swing-title').textContent=L.swing_reading?L.swing_reading.title:'';$('close-swing-title').style.display=L.swing_reading?'':'none';
+$('close-options').innerHTML=(L.option_lines||[]).map(t=>'<div class="insight-row"><div class="muted">옵션 · '+esc(t)+'</div></div>').join('')+(L.structure_text?'<div class="note">'+esc(L.structure_text)+'</div>':'');
+const n=(v,d)=>v==null?'—':signed(v,d||0);
+$('close-table').innerHTML='<table><thead><tr><th>날짜</th><th>상태</th><th class="r">외국인 선물<br>계약 (억)</th><th class="r">외국인 선물<br>미니 포함</th><th class="r">기관계 선물<br>계약 (억)</th><th class="r">개인 선물<br>계약</th><th class="r">선물가격<br>전일 대비</th><th class="r">미결제 증감<br>계약</th><th>가격·미결제</th><th class="r">외국인 현물<br>억원</th><th class="r">옵션 외국인<br>선물 환산</th></tr></thead><tbody>'+C.rows.map(r=>'<tr><td>'+esc(r.label)+'</td><td>'+(r.status==='확정 추정'?'확정 추정':'<span style="color:var(--gold)">'+esc(r.status)+'</span>')+(r.cross?(r.cross.match?'<br><small class="muted">t1665 일치</small>':'<br><small class="gold">t1665 '+signed(r.cross.foreign)+'</small>'):'')+'</td><td class="r num '+color(r.foreign_qty)+'">'+n(r.foreign_qty)+'<br><small class="muted">'+n(r.foreign_amt)+'억</small></td><td class="r num '+color(r.foreign_eq?.qty)+'">'+(r.foreign_eq?n(r.foreign_eq.qty)+'<br><small class="muted">'+n(r.foreign_eq.amt)+'억</small>':'<span class="muted">—</span>')+'</td><td class="r num '+color(r.inst_qty)+'">'+n(r.inst_qty)+'<br><small class="muted">'+n(r.inst_amt)+'억</small></td><td class="r num '+color(r.individual_qty)+'">'+n(r.individual_qty)+'</td><td class="r num '+color(r.fut_pct)+'">'+(r.fut_price==null?'—':fmt(r.fut_price,2)+'<br><small>'+signed(r.fut_pct,2)+'%</small>')+'</td><td class="r num '+color(r.oi_change)+'">'+n(r.oi_change)+(r.oi==null?'':'<br><small class="muted">'+fmt(r.oi)+'</small>')+'</td><td>'+(r.quadrant?esc(r.quadrant):'<span class="muted">—</span>')+'</td><td class="r num">'+n(r.foreign_spot)+(r.spot_note?'<br><small class="muted">'+esc(r.spot_note)+'</small>':'')+'</td><td class="r num">'+(r.option_kiwoom==null?'—':n(r.option_kiwoom)+' ~ '+n(r.option_bs))+'</td></tr>').join('')+'</tbody></table>'}
+function renderInsight(A){
+if(!A||A.status!=='received'){$('insight-time').textContent='대기';empty('insight-who',A?.note||'수집기가 옵션 시세를 조회하면 표시됩니다.');$('insight-structure').textContent='';$('insight-chart').innerHTML='';$('insight-detail').innerHTML='';return}
+$('insight-time').textContent=tm(A.generated_at)+' 조회 · '+({live:'장중 5분마다 갱신',stale:'조회 지연',archive:'장외 보관본',prior:'직전 거래일 데이터'}[A.mode]||'');
+const dot=s=>'<span class="dot '+(s>0?'up':s<0?'down':'flat')+'">'+(s>0?'▲':s<0?'▼':'·')+'</span>';
+$('insight-who').innerHTML=(A.mode_note?'<div class="note" style="color:var(--gold)">'+esc(A.mode_note)+'</div>':'')+A.flows.map(g=>'<div class="insight-row">'+dot(g.explain.side)+'<div><div>'+esc(g.explain.text)+'</div>'+(g.explain.combined_text?'<div class="muted small">'+esc(g.explain.combined_text)+'</div>':'')+'</div></div>').join('')+(A.ls_totals?'<div class="note" style="color:var(--gold)">'+esc(A.ls_totals.headline)+'</div>'+A.ls_totals.rows.map(r=>'<div class="insight-row">'+dot(0)+'<div><div>'+esc(r.text)+'</div>'+(r.amt_text?'<div class="muted small">'+esc(r.amt_text)+'</div>':'')+'</div></div>').join(''):'');
+$('insight-structure').textContent='현재 계산 기준 · 지수 ±'+(A.methodology?.near_band_pct??'미기록')+'% · '+A.structure_text;
+insightChart(A.structure);
+if(!A.flows.length){$('insight-detail').innerHTML=A.ls_totals?lsTotalsTable(A.ls_totals)+'<div class="note">'+esc(A.ls_totals.note)+'</div>':'';const st=A.structure||{};$('insight-note').textContent='기준 지수 '+fmt(A.spot,1)+'('+A.spot_source+') · '+(st.coverage||'')+' · 풋/콜 미결제 비율 '+(st.pcr_oi??'—')+' · '+A.note;return}
+const n=v=>v==null?'—':signed(v,0),ch=c=>c?n(c.kiwoom.total)+'<br><small class="muted">매매 '+n(c.kiwoom.trade)+' · 재평가 '+n(c.kiwoom.revalue)+'</small>':'—';
+$('insight-detail').innerHTML='<table><thead><tr><th>투자자</th><th class="r">합계 키움 / BS</th><th class="r">콜 매수</th><th class="r">콜 매도</th><th class="r">풋 매수</th><th class="r">풋 매도</th><th class="r">직전 조회 대비</th><th class="r">15분 전 대비</th><th class="r">누락</th><th class="r">0780 선물</th></tr></thead><tbody>'+A.flows.map(g=>{const k=g.delta.kiwoom||{},b=g.delta.bs||{},c=g.contracts||{};return '<tr><td>'+esc(g.label)+'</td><td class="r num">'+n(k.total)+' / '+n(b.total)+'</td>'+['call_buy','call_sell','put_buy','put_sell'].map(p=>'<td class="r num">'+n(k[p])+'<br><small class="muted">'+(c[p]==null?'—':c[p])+'계약</small></td>').join('')+'<td class="r num">'+ch(g.change_prev)+'</td><td class="r num">'+ch(g.change_15m)+'</td><td class="r num">'+(g.available?(g.missing_qty+g.missing_delta+g.unmatched):'전체')+'</td><td class="r num">'+(g.futures?signed(g.futures.value)+'<br><small class="muted">'+tm(g.futures.at)+(g.combined?'':' · 합산 제외')+'</small>':'미입력')+'</td></tr>'}).join('')+'</tbody></table><div class="note">변화(키움 델타 기준) = 매매분(수량 변화×현재 델타) + 재평가(지수 변동으로 같은 수량의 환산값이 바뀐 부분). 재평가가 크면 새로 쌓인 베팅이 아닙니다.</div>';
+const st=A.structure||{};$('insight-note').textContent='단위: 선물 계약 상당(델타 환산). 아래 작은 숫자는 옵션 계약 수. 기준 지수 '+fmt(A.spot,1)+'('+A.spot_source+') · '+(st.coverage||'')+' · 풋/콜 미결제 비율 '+(st.pcr_oi??'—')+' · '+A.note}
+function insightChart(S){if(!S||!S.rows.length){empty('insight-chart','옵션 미결제 시세가 없습니다.');return}
+const W=650,H=190,l=46,r=10,t=16,b=28,strikes=[...new Set(S.rows.map(x=>x.strike))].sort((a,b)=>a-b),max=Math.max(...S.rows.map(x=>x.oi),1),bw=(W-l-r)/strikes.length,X=s=>l+(strikes.indexOf(s)+.5)*bw;
+$('insight-chart').innerHTML='';const svg=node('svg',{viewBox:`0 0 ${W} ${H}`,class:'chart',role:'img','aria-label':'행사가별 미결제와 현재 지수'},$('insight-chart'));
+for(let i=0;i<=2;i++){const y=t+i*(H-t-b)/2;node('line',{x1:l,x2:W-r,y1:y,y2:y,class:'gridline'},svg);node('text',{x:l-6,y:y+3,'text-anchor':'end'},svg,fmt(max*(1-i/2)))}
+S.rows.forEach(x=>{const ht=x.oi/max*(H-t-b),j=x.cp==='C'?0:1;node('rect',{x:l+strikes.indexOf(x.strike)*bw+bw*(.1+j*.42),y:H-b-ht,width:bw*.36,height:ht,fill:x.cp==='C'?'#ff7974':'#75a8ff',rx:1},svg)});
+strikes.forEach((s,i)=>{if(i%4===0)node('text',{x:l+i*bw+bw/2,y:H-9,'text-anchor':'middle'},svg,fmt(s,1))});
+for(const[w,word,col]of[[S.near_call_wall,'콜 OI 최대','#ff7974'],[S.near_put_wall,'풋 OI 최대','#75a8ff']]){if(w&&strikes.includes(w.strike)){const ht=w.oi/max*(H-t-b);node('text',{x:X(w.strike),y:Math.max(t+8,H-b-ht-5),'text-anchor':'middle',fill:col,'font-weight':'700'},svg,word+' '+fmt(w.strike,1))}}
+const lo=strikes[0],hi=strikes[strikes.length-1];if(S.spot>=lo&&S.spot<=hi){const k=strikes.findIndex(s=>s>=S.spot),x0=k<=0?X(lo):X(strikes[k-1])+(S.spot-strikes[k-1])/(strikes[k]-strikes[k-1])*bw;node('line',{x1:x0,x2:x0,y1:t-6,y2:H-b,stroke:'#e8c77b','stroke-width':2},svg);node('text',{x:x0,y:t-7,'text-anchor':'middle',fill:'#e8c77b'},svg,'지수 '+fmt(S.spot,1))}}
+function submit0780(ev){ev.preventDefault();const map=[['m-foreign','foreign_fut_qty'],['m-inst','inst_fut_qty'],['m-ind','individual_fut_qty'],['m-fin','financial_fut_qty']],cols=[],vals=[];
+for(const [id,k] of map){const v=$(id).value.replace(/,/g,'').trim();if(!v)continue;if(!/^[-+]?\d+$/.test(v)){notice('정수 계약수만 입력하세요: '+v);return}cols.push(k);vals.push(v)}
+if(!cols.length){notice('입력한 값이 없습니다');return}
+const d=new Date(),ymd=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const text='asof,'+cols.join(',')+'\n'+ymd+'T'+$('m-time').value+':00+09:00,'+vals.join(',');
+request('/api/import',{type:'hts0780',text}).then(()=>{notice('0780 값을 입력했습니다. 15분이 지나면 수신 지연으로 바뀝니다.');refresh()}).catch(e=>notice(e.message))}
+function nowHM(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function optionsChart(O){const vals=O.rows.filter(r=>known(r.oi));if(!vals.length){empty('optionchart','LS 옵션 시세(5분 주기)가 들어오면 분포가 표시됩니다.');return}const W=650,H=210,l=50,r=12,t=14,b=30,max=Math.max(...vals.map(x=>x.oi),1),strikes=[...new Set(O.rows.map(r=>r.strike))].sort((a,b)=>a-b),bw=(W-l-r)/strikes.length;
+$('optionchart').innerHTML='';const svg=node('svg',{viewBox:`0 0 ${W} ${H}`,class:'chart',role:'img','aria-label':'행사가별 시장 미결제'},$('optionchart'));for(let i=0;i<=3;i++){const y=t+i*(H-t-b)/3;node('line',{x1:l,x2:W-r,y1:y,y2:y,class:'gridline'},svg);node('text',{x:l-7,y:y+3,'text-anchor':'end'},svg,fmt(max*(1-i/3)))}strikes.forEach((s,i)=>{for(const[cp,j,col]of[['C',0,'#ff7974'],['P',1,'#75a8ff']]){const v=vals.find(o=>o.strike===s&&o.cp===cp)?.oi;if(!known(v))continue;const ht=v/max*(H-t-b);node('rect',{x:l+i*bw+bw*(.12+j*.39),y:H-b-ht,width:bw*.32,height:ht,fill:col,rx:1},svg)}if(i%Math.max(1,Math.ceil(strikes.length/8))===0)node('text',{x:l+i*bw+bw/2,y:H-8,'text-anchor':'middle'},svg,fmt(s,1))})}
+function drawPosition(D){const g=D.positions.groups[+$('positiongroup').value];if(!g){empty('positionchart','증권사 추정 보유량 CSV를 연결하면 만기손익 곡선을 표시합니다.');$('positionstats').innerHTML='';return}chart('positionchart',[{color:'#e8c77b',decimals:1,points:g.points.map((v,i)=>({label:fmt(v),v:g.pnl_eok[i]}))}]);$('positionstats').innerHTML='<span class="pill">델타 '+signed(g.delta_contracts,1)+' 계약 상당</span><span class="pill">노출 '+signed(g.delta_notional_eok,1)+'억원</span><span class="pill">'+(g.stale?'과거 추정치':'추정치')+' · '+tm(g.asof)+'</span>'}
+$('positiongroup').onchange=()=>lastState&&drawPosition(lastState);
+let ctx;function beep(){ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=660;g.gain.value=.08;o.start();o.stop(ctx.currentTime+.15)}
+$('sound').onclick=()=>{sound=!sound;$('sound').textContent=sound?'알림음 끄기':'알림음 켜기';if(sound)beep()};
+let sessionLoad=null;
+async function renewSession(){
+if(!sessionLoad)sessionLoad=(async()=>{const response=await fetch('/api/bootstrap',{cache:'no-store'});const out=await response.json();if(!response.ok||typeof out.token!=='string'||!out.token)throw Error('화면 연결을 갱신하지 못했습니다. 새로고침 후 다시 눌러 주세요.');token=out.token;return out})().finally(()=>{sessionLoad=null});
+return sessionLoad}
+async function request(path,data){
+if(!token)await renewSession();
+const body=JSON.stringify(data),usedToken=token,send=()=>fetch(path,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body});
+let response=await send(),out=await response.json();
+// Auth rejection happens before the operation. Retry it once; never retry an
+// uncertain network failure or an operation that may already have succeeded.
+if((response.status===401&&out.code==='session_expired')||(response.status===403&&out.error==='인증 실패')){
+if(token===usedToken)await renewSession();response=await send();out=await response.json()}
+if(!response.ok)throw Error(out.error||'요청 오류');return out}
+function importCSV(type){const input=document.createElement('input');input.type='file';input.accept='.csv';input.onchange=async()=>{try{const f=input.files[0];if(!f)return;await request('/api/import',{type,text:await f.text()});notice('CSV 연결 완료. 원본 시각과 추정 여부를 확인하세요.')}catch(e){notice(e.message)}};input.click()}
+async function loadCatalog(){try{const c=await(await fetch('/api/catalog')).json();catalog=c.specs;$('trselect').innerHTML=catalog.map((s,i)=>'<option value="'+i+'">'+esc(s.trcode)+' · '+esc(s.title)+'</option>').join('');$('trselect').onchange=()=>{$('trspec').textContent=JSON.stringify(catalog[+$('trselect').value],null,2)};$('trselect').onchange();if(!catalog.length)notice(c.note||'공식 TR 정의를 읽지 못했습니다. Open API+ 로그인 상태를 확인하세요.')}catch(e){notice(e.message)}}
+async function saveSources(){try{await request('/api/sources',{sources:JSON.parse($('sources').value)});notice('TR 명세 검증 후 저장했습니다. 실제 응답 여부는 수신 상태에서 확인하세요.')}catch(e){notice(e.message)}}
+async function refresh(){try{const response=await fetch('/api/state');if(!response.ok)throw Error('수집기 응답 오류');render(await response.json())}catch(e){$('banner').textContent='수집기 연결이 끊겼습니다. 기존 화면은 과거 데이터입니다.';DerivFlowAlignment.hold('수집기 연결이 끊겼습니다.')}}
+$('m-time').value=nowHM();
+renewSession().then(d=>{$('sources').value=JSON.stringify(d.config.ocx.sources,null,2);refresh()}).catch(e=>notice(e.message));setInterval(refresh,3000);
+</script></body></html>

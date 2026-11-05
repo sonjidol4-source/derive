@@ -10,6 +10,7 @@ from engine import Engine
 def populate(eng, date='2026-10-14', until=120):
     start=dt.datetime.fromisoformat(date+'T09:00:00+09:00')
     foreign,inst,nonarb,spot,oi=-2500,400,-1500,-1000,200000
+    famt=-2500*500*.0025  # 억원(계약 × 선물가 × 25만 ÷ 1억)
     for i in range(until+1):
         at=start+dt.timedelta(minutes=i)
         # 미결제: 하락+증가(신규 매도) → 상승+감소(매도 청산) → 보합 → 하락+증가
@@ -17,13 +18,13 @@ def populate(eng, date='2026-10-14', until=120):
         elif i<62: slope=145; cash=65; price=497.58+.12*(i-22); oi_step=-25
         elif i<82: slope=30; cash=-35; price=502.38-.02*(i-62); oi_step=3
         else: slope=-150; cash=-70;price=501.98-.12*(i-82); oi_step=35
-        foreign+=slope;inst-=slope*.45;nonarb+=cash;spot+=cash*.7;oi+=oi_step
+        foreign+=slope;famt+=slope*price*.0025;inst-=slope*.45;nonarb+=cash;spot+=cash*.7;oi+=oi_step
         # 10:28~10:36 외국인 데이터 중단. 값은 유지하되 수신시각을 갱신하지 않음.
         flows={'inst_fut_qty':inst,'nonarb_amt':nonarb,'program_amt':nonarb+100,
             'arb_amt':100,'foreign_spot_amt':spot,'inst_spot_amt':400-spot*.2,
             'financial_spot_amt':-200,'individual_spot_amt':-spot,'individual_fut_qty':-foreign-inst,
             'financial_fut_qty':inst*.5,'foreign_call_amt':35,'foreign_put_amt':-8}
-        if not 88<=i<=96:flows['foreign_fut_qty']=foreign
+        if not 88<=i<=96:flows['foreign_fut_qty']=foreign;flows['foreign_fut_amt']=round(famt,1)
         residual=-.4+.012*(i-22) if 22<=i<62 else -.1-.01*max(i-82,0)
         packet={'asof':at.isoformat(),'source':'가상 데모','fut_code':'DEMO202612','opt_month':'202611',
             'values':{**flows,'k200':price,'fut_price':price+1.2+residual,'basis':1.2+residual,
